@@ -67,10 +67,10 @@ const Sidebar = () => {
             {trendingTopics.map((item, index) => (
               <div key={index} className="flex items-center justify-between group cursor-pointer">
                 <div>
-                  <p className="font-medium text-gray-900 group-hover:text-purple-600 transition-colors">
+                  <p className="font-medium text-gray-900 dark:text-gray-100 group-hover:text-purple-600 transition-colors">
                     #{item.topic}
                   </p>
-                  <p className="text-sm text-gray-500">{item.posts} posts</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{item.posts} posts</p>
                 </div>
               </div>
             ))}
@@ -90,16 +90,16 @@ const Sidebar = () => {
           <div className="space-y-4">
             {suggestedConnections.map((person, index) => (
               <div key={index} className="flex items-start space-x-3">
-                <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                  <span className="text-purple-600 font-semibold text-sm">
+                <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
+                  <span className="text-purple-600 dark:text-purple-300 font-semibold text-sm">
                     {person.name.split(' ').map(n => n[0]).join('')}
                   </span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-gray-900 text-sm">{person.name}</p>
-                  <p className="text-xs text-gray-600">{person.title}</p>
-                  <p className="text-xs text-gray-500">{person.institution}</p>
-                  <p className="text-xs text-purple-600 mt-1">{person.mutualConnections} mutual connections</p>
+                  <p className="font-medium text-gray-900 dark:text-gray-100 text-sm">{person.name}</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-300">{person.title}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{person.institution}</p>
+                  <p className="text-xs text-purple-600 dark:text-purple-400 mt-1">{person.mutualConnections} mutual connections</p>
                   <Button size="sm" variant="outline" className="mt-2 h-7 text-xs">
                     Connect
                   </Button>
@@ -122,8 +122,8 @@ const Sidebar = () => {
           <div className="space-y-3">
             {upcomingEvents.map((event, index) => (
               <div key={index} className="border-l-4 border-purple-600 pl-3">
-                <p className="font-medium text-gray-900 text-sm">{event.title}</p>
-                <p className="text-xs text-gray-600">{event.type} • {event.date}</p>
+                <p className="font-medium text-gray-900 dark:text-gray-100 text-sm">{event.title}</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300">{event.type} • {event.date}</p>
               </div>
             ))}
           </div>
@@ -142,19 +142,19 @@ const Sidebar = () => {
           <div className="grid grid-cols-2 gap-4">
             <div className="text-center">
               <p className="text-2xl font-bold text-purple-600">1.2K</p>
-              <p className="text-xs text-gray-600">Officials</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300">Officials</p>
             </div>
             <div className="text-center">
               <p className="text-2xl font-bold text-purple-600">89</p>
-              <p className="text-xs text-gray-600">Think Tanks</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300">Think Tanks</p>
             </div>
             <div className="text-center">
               <p className="text-2xl font-bold text-purple-600">45.6K</p>
-              <p className="text-xs text-gray-600">Policy Papers</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300">Policy Papers</p>
             </div>
             <div className="text-center">
               <p className="text-2xl font-bold text-purple-600">156</p>
-              <p className="text-xs text-gray-600">Countries</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300">Countries</p>
             </div>
           </div>
         </CardContent>
