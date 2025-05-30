@@ -1,54 +1,54 @@
 
 import React from 'react';
-import { TrendingUp, Calendar, Users, BookOpen, Award, Globe } from 'lucide-react';
+import { TrendingUp, Calendar, Users, Vote, Award, Globe } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
 const Sidebar = () => {
   const trendingTopics = [
-    { topic: 'Machine Learning Ethics', posts: 234 },
-    { topic: 'Climate Policy', posts: 189 },
-    { topic: 'Quantum Computing', posts: 156 },
-    { topic: 'Social Psychology', posts: 143 },
-    { topic: 'Economic Theory', posts: 128 }
+    { topic: 'EconomicPolicy', posts: 342 },
+    { topic: 'ClimateChange', posts: 289 },
+    { topic: 'ForeignPolicy', posts: 234 },
+    { topic: 'HealthcareReform', posts: 198 },
+    { topic: 'Cybersecurity', posts: 167 }
   ];
 
   const suggestedConnections = [
     {
-      name: 'Dr. Sarah Chen',
-      title: 'AI Research Director',
-      institution: 'Stanford University',
+      name: 'Sen. Robert Kim',
+      title: 'Foreign Relations Committee',
+      institution: 'U.S. Senate',
+      mutualConnections: 15
+    },
+    {
+      name: 'Dr. Angela Torres',
+      title: 'Economic Policy Director',
+      institution: 'American Enterprise Institute',
       mutualConnections: 12
     },
     {
-      name: 'Prof. Michael Roberts',
-      title: 'Economics Professor',
-      institution: 'Harvard University',
-      mutualConnections: 8
-    },
-    {
-      name: 'Dr. Emily Watson',
-      title: 'Climate Scientist',
-      institution: 'MIT',
-      mutualConnections: 15
+      name: 'Rep. David Wilson',
+      title: 'House Energy Committee',
+      institution: 'U.S. House of Representatives',
+      mutualConnections: 9
     }
   ];
 
   const upcomingEvents = [
     {
-      title: 'AI Ethics Symposium',
+      title: 'Climate Policy Forum',
       date: 'Dec 15, 2024',
-      type: 'Conference'
+      type: 'Congressional Hearing'
     },
     {
-      title: 'Climate Research Forum',
+      title: 'Economic Outlook Briefing',
       date: 'Dec 18, 2024',
-      type: 'Workshop'
+      type: 'Think Tank Event'
     },
     {
-      title: 'Academic Writing Webinar',
+      title: 'Foreign Policy Summit',
       date: 'Dec 20, 2024',
-      type: 'Webinar'
+      type: 'Conference'
     }
   ];
 
@@ -59,7 +59,7 @@ const Sidebar = () => {
         <CardHeader className="pb-3">
           <CardTitle className="flex items-center text-lg">
             <TrendingUp className="w-5 h-5 mr-2 text-purple-600" />
-            Trending Topics
+            Trending Policies
           </CardTitle>
         </CardHeader>
         <CardContent className="pt-0">
@@ -130,7 +130,7 @@ const Sidebar = () => {
         </CardContent>
       </Card>
 
-      {/* Quick Stats */}
+      {/* Platform Stats */}
       <Card>
         <CardHeader className="pb-3">
           <CardTitle className="flex items-center text-lg">
@@ -141,19 +141,19 @@ const Sidebar = () => {
         <CardContent className="pt-0">
           <div className="grid grid-cols-2 gap-4">
             <div className="text-center">
-              <p className="text-2xl font-bold text-purple-600">2.4K</p>
-              <p className="text-xs text-gray-600">Researchers</p>
+              <p className="text-2xl font-bold text-purple-600">1.2K</p>
+              <p className="text-xs text-gray-600">Officials</p>
+            </div>
+            <div className="text-center">
+              <p className="text-2xl font-bold text-purple-600">89</p>
+              <p className="text-xs text-gray-600">Think Tanks</p>
+            </div>
+            <div className="text-center">
+              <p className="text-2xl font-bold text-purple-600">45.6K</p>
+              <p className="text-xs text-gray-600">Policy Papers</p>
             </div>
             <div className="text-center">
               <p className="text-2xl font-bold text-purple-600">156</p>
-              <p className="text-xs text-gray-600">Institutions</p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-purple-600">12.8K</p>
-              <p className="text-xs text-gray-600">Publications</p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-purple-600">45</p>
               <p className="text-xs text-gray-600">Countries</p>
             </div>
           </div>

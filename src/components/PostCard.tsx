@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Heart, MessageCircle, Share2, Bookmark, MoreHorizontal, ExternalLink } from 'lucide-react';
+import { Heart, MessageCircle, Share2, Bookmark, MoreHorizontal, ExternalLink, BarChart3, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -17,7 +17,7 @@ interface PostCardProps {
     };
     content: string;
     timestamp: string;
-    type: 'academic' | 'think-tank' | 'general';
+    type: 'government' | 'think-tank' | 'general';
     tags: string[];
     metrics: {
       likes: number;
@@ -26,13 +26,15 @@ interface PostCardProps {
     };
     hasLink?: boolean;
     linkTitle?: string;
+    hasChart?: boolean;
+    sources?: string[];
   };
 }
 
 const PostCard = ({ post }: PostCardProps) => {
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'academic': return 'bg-blue-100 text-blue-800 border-blue-200';
+      case 'government': return 'bg-blue-100 text-blue-800 border-blue-200';
       case 'think-tank': return 'bg-green-100 text-green-800 border-green-200';
       case 'general': return 'bg-gray-100 text-gray-800 border-gray-200';
       default: return 'bg-gray-100 text-gray-800 border-gray-200';
@@ -41,7 +43,7 @@ const PostCard = ({ post }: PostCardProps) => {
 
   const getTypeLabel = (type: string) => {
     switch (type) {
-      case 'academic': return 'Academic';
+      case 'government': return 'Government';
       case 'think-tank': return 'Think Tank';
       case 'general': return 'General';
       default: return 'General';
@@ -88,11 +90,34 @@ const PostCard = ({ post }: PostCardProps) => {
           <p className="text-gray-900 leading-relaxed">{post.content}</p>
         </div>
 
+        {post.hasChart && (
+          <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+            <div className="flex items-center justify-center h-32 text-gray-500">
+              <BarChart3 className="w-8 h-8 mr-2" />
+              <span className="text-sm">Chart visualization placeholder</span>
+            </div>
+          </div>
+        )}
+
         {post.hasLink && post.linkTitle && (
           <div className="mb-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-gray-900">{post.linkTitle}</span>
               <ExternalLink className="w-4 h-4 text-gray-500" />
+            </div>
+          </div>
+        )}
+
+        {post.sources && post.sources.length > 0 && (
+          <div className="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+            <div className="flex items-start space-x-2">
+              <FileText className="w-4 h-4 text-blue-600 mt-0.5" />
+              <div>
+                <p className="text-sm font-medium text-blue-900 mb-1">Sources:</p>
+                {post.sources.map((source, index) => (
+                  <p key={index} className="text-xs text-blue-700">{source}</p>
+                ))}
+              </div>
             </div>
           </div>
         )}

@@ -9,28 +9,30 @@ import { PlusCircle } from 'lucide-react';
 const Index = () => {
   const [activeFilter, setActiveFilter] = useState('all');
 
-  // Sample data for posts
+  // Sample data for posts with political themes
   const posts = [
     {
       id: '1',
       author: {
-        name: 'Dr. Alexandra Martinez',
-        title: 'Professor of Computational Biology',
-        institution: 'MIT',
+        name: 'Senator Alexandra Johnson',
+        title: 'U.S. Senator',
+        institution: 'Senate Finance Committee',
         avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
         verified: true
       },
-      content: 'Excited to share our latest findings on CRISPR gene editing applications in treating rare genetic disorders. Our research demonstrates a 94% success rate in preliminary trials, opening new possibilities for personalized medicine.',
+      content: 'Presenting our comprehensive economic recovery plan focusing on infrastructure investment and job creation. Our analysis shows potential for 2.4 million new jobs over the next 3 years.',
       timestamp: '2 hours ago',
-      type: 'academic' as const,
-      tags: ['CRISPR', 'GeneTherapy', 'PersonalizedMedicine', 'Research'],
+      type: 'government' as const,
+      tags: ['EconomicPolicy', 'JobCreation', 'Infrastructure', 'Recovery'],
       metrics: {
-        likes: 156,
-        comments: 23,
-        shares: 18
+        likes: 1847,
+        comments: 234,
+        shares: 189
       },
+      hasChart: true,
       hasLink: true,
-      linkTitle: 'CRISPR Applications in Rare Disease Treatment - Nature Journal'
+      linkTitle: 'Economic Recovery Plan - Full Policy Document',
+      sources: ['Congressional Budget Office Report 2024', 'Department of Labor Statistics']
     },
     {
       id: '2',
@@ -41,78 +43,82 @@ const Index = () => {
         avatar: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=150&h=150&fit=crop',
         verified: true
       },
-      content: 'Our latest policy brief examines the economic implications of remote work policies post-pandemic. Key findings suggest a 15% increase in productivity but challenges in urban economic ecosystems that depend on office workers.',
+      content: 'Our latest analysis on climate change legislation reveals bipartisan support for renewable energy initiatives. Key findings show 73% public approval for federal clean energy investments.',
       timestamp: '4 hours ago',
       type: 'think-tank' as const,
-      tags: ['EconomicPolicy', 'RemoteWork', 'UrbanPlanning', 'PostPandemic'],
+      tags: ['ClimateChange', 'RenewableEnergy', 'BipartisanPolicy', 'Environment'],
       metrics: {
-        likes: 89,
-        comments: 31,
-        shares: 45
+        likes: 892,
+        comments: 156,
+        shares: 234
       },
       hasLink: true,
-      linkTitle: 'Remote Work Economic Impact Analysis - Policy Brief 2024'
+      linkTitle: 'Climate Policy Analysis - Brookings Report 2024',
+      sources: ['EPA Climate Data 2024', 'Pew Research Center Survey']
     },
     {
       id: '3',
       author: {
-        name: 'Sarah Chen',
-        title: 'PhD Candidate in Psychology',
-        institution: 'Stanford University',
+        name: 'Maria Rodriguez',
+        title: 'Policy Analyst',
+        institution: 'Independent Researcher',
         avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
         verified: false
       },
-      content: 'Attending the International Conference on Social Psychology next week. Looking forward to presenting our research on digital communication patterns and their impact on interpersonal relationships. Any fellow attendees here?',
+      content: 'Attending the Foreign Policy Summit next week. Looking forward to discussions on diplomatic relations with emerging economies and trade policy implications.',
       timestamp: '6 hours ago',
       type: 'general' as const,
-      tags: ['SocialPsychology', 'DigitalCommunication', 'Conference', 'Research'],
+      tags: ['ForeignPolicy', 'Diplomacy', 'TradePolicy', 'Summit'],
       metrics: {
-        likes: 34,
-        comments: 12,
-        shares: 5
+        likes: 124,
+        comments: 45,
+        shares: 23
       }
     },
     {
       id: '4',
       author: {
-        name: 'Prof. Michael Thompson',
-        title: 'Director of Climate Research',
-        institution: 'Oxford University',
+        name: 'Rep. Michael Chen',
+        title: 'House Representative',
+        institution: 'House Energy Committee',
         avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
         verified: true
       },
-      content: 'Breaking: Our 10-year longitudinal study on Arctic ice patterns reveals acceleration in melting rates beyond previous models. This data is crucial for updating climate change projections and policy recommendations.',
+      content: 'Breaking: Introducing bipartisan legislation for national cybersecurity infrastructure. This bill addresses critical vulnerabilities in our digital economy and national security systems.',
       timestamp: '8 hours ago',
-      type: 'academic' as const,
-      tags: ['ClimateChange', 'ArcticResearch', 'EnvironmentalScience', 'LongitudinalStudy'],
+      type: 'government' as const,
+      tags: ['Cybersecurity', 'NationalSecurity', 'Bipartisan', 'Infrastructure'],
       metrics: {
-        likes: 203,
-        comments: 67,
-        shares: 89
+        likes: 567,
+        comments: 89,
+        shares: 145
       },
       hasLink: true,
-      linkTitle: 'Arctic Ice Melting Acceleration Study - Environmental Research Letters'
+      linkTitle: 'Cybersecurity Infrastructure Act - H.R. 2024',
+      sources: ['Department of Homeland Security Assessment', 'NIST Cybersecurity Framework']
     },
     {
       id: '5',
       author: {
-        name: 'RAND Corporation',
-        title: 'Research Organization',
-        institution: 'Santa Monica, CA',
+        name: 'Heritage Foundation',
+        title: 'Policy Institute',
+        institution: 'Washington, D.C.',
         avatar: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=150&h=150&fit=crop',
         verified: true
       },
-      content: 'New analysis on cybersecurity threats in critical infrastructure. Our report identifies key vulnerabilities and proposes a framework for enhanced protection of power grids, water systems, and transportation networks.',
+      content: 'New research on healthcare policy reform shows promising results from state-level innovations. Our comprehensive study examines cost reduction strategies across 12 states.',
       timestamp: '12 hours ago',
       type: 'think-tank' as const,
-      tags: ['Cybersecurity', 'CriticalInfrastructure', 'NationalSecurity', 'PolicyAnalysis'],
+      tags: ['HealthcarePolicy', 'StateGovernment', 'CostReduction', 'PolicyInnovation'],
       metrics: {
-        likes: 145,
-        comments: 28,
-        shares: 52
+        likes: 445,
+        comments: 78,
+        shares: 112
       },
+      hasChart: true,
       hasLink: true,
-      linkTitle: 'Critical Infrastructure Cybersecurity Framework - RAND Report'
+      linkTitle: 'Healthcare Policy Innovation Study - Heritage Report',
+      sources: ['CMS Data Analysis 2024', 'State Health Department Reports']
     }
   ];
 
@@ -133,7 +139,7 @@ const Index = () => {
             <div className="mb-6">
               <Button className="w-full justify-start bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 h-12">
                 <PlusCircle className="w-5 h-5 mr-3" />
-                Share your research, insights, or thoughts...
+                Share your policy insights, analysis, or thoughts...
               </Button>
             </div>
 

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Search, Bell, MessageCircle, User, BookOpen, Building, Users } from 'lucide-react';
+import { Search, Bell, MessageCircle, User, Vote, Landmark, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -12,8 +12,8 @@ interface HeaderProps {
 const Header = ({ activeFilter, onFilterChange }: HeaderProps) => {
   const filters = [
     { id: 'all', label: 'All Posts', icon: Users },
-    { id: 'academic', label: 'Academic', icon: BookOpen },
-    { id: 'think-tank', label: 'Think Tanks', icon: Building },
+    { id: 'government', label: 'Government Officials', icon: Landmark },
+    { id: 'think-tank', label: 'Think Tanks', icon: Vote },
     { id: 'general', label: 'General', icon: MessageCircle }
   ];
 
@@ -25,9 +25,9 @@ const Header = ({ activeFilter, onFilterChange }: HeaderProps) => {
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
               <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
-                <BookOpen className="w-5 h-5 text-white" />
+                <Vote className="w-5 h-5 text-white" />
               </div>
-              <span className="ml-2 text-xl font-bold text-gray-900">AcademiaConnect</span>
+              <span className="ml-2 text-xl font-bold text-gray-900">VoteX</span>
             </div>
           </div>
 
@@ -36,7 +36,7 @@ const Header = ({ activeFilter, onFilterChange }: HeaderProps) => {
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <Input 
-                placeholder="Search posts, researchers, institutions..." 
+                placeholder="Search posts, officials, policies..." 
                 className="pl-10 bg-gray-50 border-gray-200 focus:bg-white"
               />
             </div>
