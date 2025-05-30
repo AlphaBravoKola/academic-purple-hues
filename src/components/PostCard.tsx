@@ -69,41 +69,43 @@ const PostCard = ({ post }: PostCardProps) => {
     if ('year' in firstDataPoint && 'jobs' in firstDataPoint) {
       // Line chart for job growth over time
       return (
-        <ChartContainer config={chartConfig}>
-          <LineChart data={post.chartData}>
-            <XAxis dataKey="year" />
-            <YAxis />
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={post.chartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
+            <XAxis dataKey="year" fontSize={12} />
+            <YAxis fontSize={12} />
             <ChartTooltip content={<ChartTooltipContent />} />
             <Line type="monotone" dataKey="jobs" stroke="#8b5cf6" strokeWidth={2} />
           </LineChart>
-        </ChartContainer>
+        </ResponsiveContainer>
       );
     } else if ('energy' in firstDataPoint && 'support' in firstDataPoint) {
       // Bar chart for energy support
       return (
-        <ChartContainer config={chartConfig}>
-          <BarChart data={post.chartData}>
-            <XAxis dataKey="energy" />
-            <YAxis />
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={post.chartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
+            <XAxis dataKey="energy" fontSize={12} />
+            <YAxis fontSize={12} />
             <ChartTooltip content={<ChartTooltipContent />} />
             <Bar dataKey="support" fill="#8b5cf6" />
           </BarChart>
-        </ChartContainer>
+        </ResponsiveContainer>
       );
     } else if ('category' in firstDataPoint && 'vulnerabilities' in firstDataPoint) {
       // Pie chart for vulnerabilities
       const COLORS = ['#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe'];
       return (
-        <ChartContainer config={chartConfig}>
-          <PieChart>
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
             <Pie
               data={post.chartData}
               cx="50%"
               cy="50%"
-              outerRadius={80}
+              outerRadius={60}
               fill="#8884d8"
               dataKey="vulnerabilities"
               label={({ category, vulnerabilities }) => `${category}: ${vulnerabilities}`}
+              labelLine={false}
+              fontSize={10}
             >
               {post.chartData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -111,19 +113,19 @@ const PostCard = ({ post }: PostCardProps) => {
             </Pie>
             <ChartTooltip content={<ChartTooltipContent />} />
           </PieChart>
-        </ChartContainer>
+        </ResponsiveContainer>
       );
     } else if ('state' in firstDataPoint && 'savings' in firstDataPoint) {
       // Bar chart for state savings
       return (
-        <ChartContainer config={chartConfig}>
-          <BarChart data={post.chartData}>
-            <XAxis dataKey="state" />
-            <YAxis />
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={post.chartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
+            <XAxis dataKey="state" fontSize={12} />
+            <YAxis fontSize={12} />
             <ChartTooltip content={<ChartTooltipContent />} />
             <Bar dataKey="savings" fill="#8b5cf6" />
           </BarChart>
-        </ChartContainer>
+        </ResponsiveContainer>
       );
     }
     
@@ -172,7 +174,7 @@ const PostCard = ({ post }: PostCardProps) => {
 
         {post.hasChart && post.chartData && (
           <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-            <div className="h-64">
+            <div className="w-full h-64 min-h-64">
               {renderChart()}
             </div>
           </div>
