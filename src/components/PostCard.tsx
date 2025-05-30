@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Heart, MessageCircle, Share2, Bookmark, MoreHorizontal, ExternalLink, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -66,19 +67,26 @@ const PostCard = ({ post }: PostCardProps) => {
     
     // Determine chart type based on data structure
     if ('year' in firstDataPoint && 'jobs' in firstDataPoint) {
-      // Line chart for job growth over time
+      // Horizontal bar chart for job creation by sector
       return (
         <div className="w-full">
-          <h4 className="text-sm font-medium text-gray-700 mb-3">Job Creation Projection</h4>
+          <h4 className="text-sm font-medium text-gray-700 mb-3">Job Creation by Sector (thousands)</h4>
           <div className="h-48 w-full">
             <ChartContainer config={chartConfig}>
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={post.chartData} margin={{ top: 10, right: 10, left: 10, bottom: 20 }}>
-                  <XAxis dataKey="year" fontSize={12} />
-                  <YAxis fontSize={12} tickFormatter={(value) => `${(value / 1000000).toFixed(1)}M`} />
-                  <ChartTooltip content={<ChartTooltipContent />} />
-                  <Line type="monotone" dataKey="jobs" stroke="#8b5cf6" strokeWidth={2} />
-                </LineChart>
+                <BarChart 
+                  data={post.chartData} 
+                  layout="horizontal"
+                  margin={{ top: 10, right: 30, left: 60, bottom: 10 }}
+                >
+                  <XAxis type="number" fontSize={12} tickFormatter={(value) => `${value}k`} />
+                  <YAxis type="category" dataKey="year" fontSize={12} width={50} />
+                  <ChartTooltip 
+                    content={<ChartTooltipContent />} 
+                    formatter={(value) => [`${value}k jobs`, 'Jobs Created']}
+                  />
+                  <Bar dataKey="jobs" fill="#8b5cf6" />
+                </BarChart>
               </ResponsiveContainer>
             </ChartContainer>
           </div>
@@ -95,7 +103,10 @@ const PostCard = ({ post }: PostCardProps) => {
                 <BarChart data={post.chartData} margin={{ top: 10, right: 10, left: 10, bottom: 20 }}>
                   <XAxis dataKey="energy" fontSize={12} />
                   <YAxis fontSize={12} domain={[0, 100]} />
-                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <ChartTooltip 
+                    content={<ChartTooltipContent />}
+                    formatter={(value) => [`${value}%`, 'Support']}
+                  />
                   <Bar dataKey="support" fill="#8b5cf6" />
                 </BarChart>
               </ResponsiveContainer>
@@ -126,7 +137,10 @@ const PostCard = ({ post }: PostCardProps) => {
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
-                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <ChartTooltip 
+                    content={<ChartTooltipContent />}
+                    formatter={(value) => [value, 'Vulnerabilities']}
+                  />
                 </PieChart>
               </ResponsiveContainer>
             </ChartContainer>
@@ -155,7 +169,10 @@ const PostCard = ({ post }: PostCardProps) => {
                 <BarChart data={post.chartData} margin={{ top: 10, right: 10, left: 10, bottom: 20 }}>
                   <XAxis dataKey="state" fontSize={12} />
                   <YAxis fontSize={12} domain={[0, 20]} />
-                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <ChartTooltip 
+                    content={<ChartTooltipContent />}
+                    formatter={(value) => [`${value}%`, 'Savings']}
+                  />
                   <Bar dataKey="savings" fill="#8b5cf6" />
                 </BarChart>
               </ResponsiveContainer>

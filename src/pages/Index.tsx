@@ -20,7 +20,7 @@ const Index = () => {
         avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
         verified: true
       },
-      content: 'Presenting our comprehensive economic recovery plan focusing on infrastructure investment and job creation. Our analysis shows potential for 2.4 million new jobs over the next 3 years.',
+      content: 'Presenting our comprehensive economic recovery plan focusing on infrastructure investment and job creation. Our analysis shows job creation potential across key sectors.',
       timestamp: '2 hours ago',
       type: 'government' as const,
       tags: ['EconomicPolicy', 'JobCreation', 'Infrastructure', 'Recovery'],
@@ -31,10 +31,10 @@ const Index = () => {
       },
       hasChart: true,
       chartData: [
-        { year: '2024', jobs: 800000 },
-        { year: '2025', jobs: 1600000 },
-        { year: '2026', jobs: 2400000 },
-        { year: '2027', jobs: 3200000 }
+        { year: 'Infrastructure', jobs: 240 },
+        { year: 'Healthcare', jobs: 180 },
+        { year: 'Technology', jobs: 320 },
+        { year: 'Manufacturing', jobs: 160 }
       ],
       hasLink: true,
       linkTitle: 'Economic Recovery Plan - Full Policy Document',
