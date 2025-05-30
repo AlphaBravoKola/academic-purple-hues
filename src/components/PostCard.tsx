@@ -37,10 +37,10 @@ interface PostCardProps {
 const PostCard = ({ post }: PostCardProps) => {
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'government': return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'think-tank': return 'bg-green-100 text-green-800 border-green-200';
-      case 'general': return 'bg-gray-100 text-gray-800 border-gray-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+      case 'government': return 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:border-blue-700';
+      case 'think-tank': return 'bg-green-100 text-green-800 border-green-200 dark:bg-green-900 dark:text-green-300 dark:border-green-700';
+      case 'general': return 'bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600';
+      default: return 'bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600';
     }
   };
 
@@ -70,7 +70,7 @@ const PostCard = ({ post }: PostCardProps) => {
       // Horizontal bar chart for job creation by sector
       return (
         <div className="w-full">
-          <h4 className="text-sm font-medium text-gray-700 mb-3">Job Creation by Sector (thousands)</h4>
+          <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Job Creation by Sector (thousands)</h4>
           <div className="h-48 w-full">
             <ChartContainer config={chartConfig}>
               <ResponsiveContainer width="100%" height="100%">
@@ -96,7 +96,7 @@ const PostCard = ({ post }: PostCardProps) => {
       // Bar chart for energy support
       return (
         <div className="w-full">
-          <h4 className="text-sm font-medium text-gray-700 mb-3">Public Support for Energy Sources (%)</h4>
+          <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Public Support for Energy Sources (%)</h4>
           <div className="h-48 w-full">
             <ChartContainer config={chartConfig}>
               <ResponsiveContainer width="100%" height="100%">
@@ -119,7 +119,7 @@ const PostCard = ({ post }: PostCardProps) => {
       const COLORS = ['#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe'];
       return (
         <div className="w-full">
-          <h4 className="text-sm font-medium text-gray-700 mb-3">Cybersecurity Vulnerabilities by Sector</h4>
+          <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Cybersecurity Vulnerabilities by Sector</h4>
           <div className="h-48 w-full flex justify-center">
             <ChartContainer config={chartConfig}>
               <ResponsiveContainer width="100%" height="100%">
@@ -147,7 +147,7 @@ const PostCard = ({ post }: PostCardProps) => {
           </div>
           <div className="flex flex-wrap gap-2 mt-2 justify-center">
             {post.chartData.map((entry, index) => (
-              <div key={entry.category} className="flex items-center gap-1 text-xs">
+              <div key={entry.category} className="flex items-center gap-1 text-xs text-gray-600 dark:text-gray-400">
                 <div 
                   className="w-3 h-3 rounded" 
                   style={{ backgroundColor: COLORS[index % COLORS.length] }}
@@ -162,7 +162,7 @@ const PostCard = ({ post }: PostCardProps) => {
       // Bar chart for state savings
       return (
         <div className="w-full">
-          <h4 className="text-sm font-medium text-gray-700 mb-3">Healthcare Cost Savings by State (%)</h4>
+          <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Healthcare Cost Savings by State (%)</h4>
           <div className="h-48 w-full">
             <ChartContainer config={chartConfig}>
               <ResponsiveContainer width="100%" height="100%">
@@ -186,7 +186,7 @@ const PostCard = ({ post }: PostCardProps) => {
   };
 
   return (
-    <Card className="mb-6 hover:shadow-lg transition-shadow duration-200">
+    <Card className="mb-6 hover:shadow-lg transition-shadow duration-200 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex items-start space-x-3">
@@ -197,7 +197,7 @@ const PostCard = ({ post }: PostCardProps) => {
             />
             <div className="flex-1 min-w-0">
               <div className="flex items-center space-x-2">
-                <h3 className="font-semibold text-gray-900 truncate">{post.author.name}</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white truncate">{post.author.name}</h3>
                 {post.author.verified && (
                   <div className="w-4 h-4 bg-purple-600 rounded-full flex items-center justify-center">
                     <span className="text-white text-xs">✓</span>
@@ -207,12 +207,12 @@ const PostCard = ({ post }: PostCardProps) => {
                   {getTypeLabel(post.type)}
                 </Badge>
               </div>
-              <p className="text-sm text-gray-600">{post.author.title}</p>
-              <p className="text-sm text-gray-500">{post.author.institution}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{post.author.title}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-500">{post.author.institution}</p>
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            <span className="text-sm text-gray-500">{post.timestamp}</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400">{post.timestamp}</span>
             <Button variant="ghost" size="sm">
               <MoreHorizontal className="w-4 h-4" />
             </Button>
@@ -222,32 +222,32 @@ const PostCard = ({ post }: PostCardProps) => {
 
       <CardContent className="pt-0">
         <div className="mb-4">
-          <p className="text-gray-900 leading-relaxed">{post.content}</p>
+          <p className="text-gray-900 dark:text-gray-100 leading-relaxed">{post.content}</p>
         </div>
 
         {post.hasChart && post.chartData && (
-          <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+          <div className="mb-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 overflow-hidden">
             {renderChart()}
           </div>
         )}
 
         {post.hasLink && post.linkTitle && (
-          <div className="mb-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
+          <div className="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-gray-900">{post.linkTitle}</span>
-              <ExternalLink className="w-4 h-4 text-gray-500" />
+              <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{post.linkTitle}</span>
+              <ExternalLink className="w-4 h-4 text-gray-500 dark:text-gray-400" />
             </div>
           </div>
         )}
 
         {post.sources && post.sources.length > 0 && (
-          <div className="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+          <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
             <div className="flex items-start space-x-2">
-              <FileText className="w-4 h-4 text-blue-600 mt-0.5" />
+              <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5" />
               <div>
-                <p className="text-sm font-medium text-blue-900 mb-1">Sources:</p>
+                <p className="text-sm font-medium text-blue-900 dark:text-blue-300 mb-1">Sources:</p>
                 {post.sources.map((source, index) => (
-                  <p key={index} className="text-xs text-blue-700">{source}</p>
+                  <p key={index} className="text-xs text-blue-700 dark:text-blue-400">{source}</p>
                 ))}
               </div>
             </div>
@@ -257,29 +257,29 @@ const PostCard = ({ post }: PostCardProps) => {
         {post.tags.length > 0 && (
           <div className="mb-4 flex flex-wrap gap-2">
             {post.tags.map((tag, index) => (
-              <Badge key={index} variant="secondary" className="text-xs">
+              <Badge key={index} variant="secondary" className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
                 {tag}
               </Badge>
             ))}
           </div>
         )}
 
-        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+        <div className="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-700">
           <div className="flex items-center space-x-6">
-            <Button variant="ghost" size="sm" className="flex items-center space-x-2 text-gray-600 hover:text-purple-600">
+            <Button variant="ghost" size="sm" className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400">
               <Heart className="w-4 h-4" />
               <span className="text-sm">{post.metrics.likes}</span>
             </Button>
-            <Button variant="ghost" size="sm" className="flex items-center space-x-2 text-gray-600 hover:text-purple-600">
+            <Button variant="ghost" size="sm" className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400">
               <MessageCircle className="w-4 h-4" />
               <span className="text-sm">{post.metrics.comments}</span>
             </Button>
-            <Button variant="ghost" size="sm" className="flex items-center space-x-2 text-gray-600 hover:text-purple-600">
+            <Button variant="ghost" size="sm" className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400">
               <Share2 className="w-4 h-4" />
               <span className="text-sm">{post.metrics.shares}</span>
             </Button>
           </div>
-          <Button variant="ghost" size="sm" className="text-gray-600 hover:text-purple-600">
+          <Button variant="ghost" size="sm" className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400">
             <Bookmark className="w-4 h-4" />
           </Button>
         </div>

@@ -155,7 +155,7 @@ const Index = () => {
     : posts.filter(post => post.type === activeFilter);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header activeFilter={activeFilter} onFilterChange={setActiveFilter} />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -164,7 +164,7 @@ const Index = () => {
           <div className="lg:col-span-3">
             {/* Create Post Button */}
             <div className="mb-6">
-              <Button className="w-full justify-start bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 h-12">
+              <Button className="w-full justify-start bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 h-12">
                 <PlusCircle className="w-5 h-5 mr-3" />
                 Share your policy insights, analysis, or thoughts...
               </Button>
@@ -178,8 +178,8 @@ const Index = () => {
                 ))
               ) : (
                 <div className="text-center py-12">
-                  <p className="text-gray-500 text-lg">No posts found for this filter.</p>
-                  <p className="text-gray-400 text-sm mt-2">Try selecting a different feed or check back later.</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-lg">No posts found for this filter.</p>
+                  <p className="text-gray-400 dark:text-gray-500 text-sm mt-2">Try selecting a different feed or check back later.</p>
                 </div>
               )}
             </div>
