@@ -1,9 +1,11 @@
 
 import React from 'react';
-import { Heart, MessageCircle, Share2, Bookmark, MoreHorizontal, ExternalLink, BarChart3, FileText } from 'lucide-react';
+import { Heart, MessageCircle, Share2, Bookmark, MoreHorizontal, ExternalLink, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
 
 interface PostCardProps {
   post: {
@@ -27,6 +29,7 @@ interface PostCardProps {
     hasLink?: boolean;
     linkTitle?: string;
     hasChart?: boolean;
+    chartData?: any[];
     sources?: string[];
   };
 }
@@ -48,6 +51,83 @@ const PostCard = ({ post }: PostCardProps) => {
       case 'general': return 'General';
       default: return 'General';
     }
+  };
+
+  const chartConfig = {
+    data: {
+      label: "Data",
+      color: "hsl(var(--chart-1))",
+    },
+  };
+
+  const renderChart = () => {
+    if (!post.chartData || post.chartData.length === 0) return null;
+
+    const firstDataPoint = post.chartData[0];
+    
+    // Determine chart type based on data structure
+    if ('year' in firstDataPoint && 'jobs' in firstDataPoint) {
+      // Line chart for job growth over time
+      return (
+        <ChartContainer config={chartConfig}>
+          <LineChart data={post.chartData}>
+            <XAxis dataKey="year" />
+            <YAxis />
+            <ChartTooltip content={<ChartTooltipContent />} />
+            <Line type="monotone" dataKey="jobs" stroke="#8b5cf6" strokeWidth={2} />
+          </LineChart>
+        </ChartContainer>
+      );
+    } else if ('energy' in firstDataPoint && 'support' in firstDataPoint) {
+      // Bar chart for energy support
+      return (
+        <ChartContainer config={chartConfig}>
+          <BarChart data={post.chartData}>
+            <XAxis dataKey="energy" />
+            <YAxis />
+            <ChartTooltip content={<ChartTooltipContent />} />
+            <Bar dataKey="support" fill="#8b5cf6" />
+          </BarChart>
+        </ChartContainer>
+      );
+    } else if ('category' in firstDataPoint && 'vulnerabilities' in firstDataPoint) {
+      // Pie chart for vulnerabilities
+      const COLORS = ['#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe'];
+      return (
+        <ChartContainer config={chartConfig}>
+          <PieChart>
+            <Pie
+              data={post.chartData}
+              cx="50%"
+              cy="50%"
+              outerRadius={80}
+              fill="#8884d8"
+              dataKey="vulnerabilities"
+              label={({ category, vulnerabilities }) => `${category}: ${vulnerabilities}`}
+            >
+              {post.chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+            <ChartTooltip content={<ChartTooltipContent />} />
+          </PieChart>
+        </ChartContainer>
+      );
+    } else if ('state' in firstDataPoint && 'savings' in firstDataPoint) {
+      // Bar chart for state savings
+      return (
+        <ChartContainer config={chartConfig}>
+          <BarChart data={post.chartData}>
+            <XAxis dataKey="state" />
+            <YAxis />
+            <ChartTooltip content={<ChartTooltipContent />} />
+            <Bar dataKey="savings" fill="#8b5cf6" />
+          </BarChart>
+        </ChartContainer>
+      );
+    }
+    
+    return null;
   };
 
   return (
@@ -90,11 +170,10 @@ const PostCard = ({ post }: PostCardProps) => {
           <p className="text-gray-900 leading-relaxed">{post.content}</p>
         </div>
 
-        {post.hasChart && (
+        {post.hasChart && post.chartData && (
           <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-            <div className="flex items-center justify-center h-32 text-gray-500">
-              <BarChart3 className="w-8 h-8 mr-2" />
-              <span className="text-sm">Chart visualization placeholder</span>
+            <div className="h-64">
+              {renderChart()}
             </div>
           </div>
         )}

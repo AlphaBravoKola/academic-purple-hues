@@ -30,6 +30,12 @@ const Index = () => {
         shares: 189
       },
       hasChart: true,
+      chartData: [
+        { year: '2024', jobs: 800000 },
+        { year: '2025', jobs: 1600000 },
+        { year: '2026', jobs: 2400000 },
+        { year: '2027', jobs: 3200000 }
+      ],
       hasLink: true,
       linkTitle: 'Economic Recovery Plan - Full Policy Document',
       sources: ['Congressional Budget Office Report 2024', 'Department of Labor Statistics']
@@ -40,7 +46,7 @@ const Index = () => {
         name: 'Brookings Institution',
         title: 'Think Tank',
         institution: 'Washington, D.C.',
-        avatar: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=150&h=150&fit=crop',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
         verified: true
       },
       content: 'Our latest analysis on climate change legislation reveals bipartisan support for renewable energy initiatives. Key findings show 73% public approval for federal clean energy investments.',
@@ -52,6 +58,13 @@ const Index = () => {
         comments: 156,
         shares: 234
       },
+      hasChart: true,
+      chartData: [
+        { energy: 'Solar', support: 78 },
+        { energy: 'Wind', support: 72 },
+        { energy: 'Hydro', support: 68 },
+        { energy: 'Nuclear', support: 45 }
+      ],
       hasLink: true,
       linkTitle: 'Climate Policy Analysis - Brookings Report 2024',
       sources: ['EPA Climate Data 2024', 'Pew Research Center Survey']
@@ -93,6 +106,13 @@ const Index = () => {
         comments: 89,
         shares: 145
       },
+      hasChart: true,
+      chartData: [
+        { category: 'Financial', vulnerabilities: 45 },
+        { category: 'Healthcare', vulnerabilities: 38 },
+        { category: 'Energy', vulnerabilities: 52 },
+        { category: 'Transport', vulnerabilities: 29 }
+      ],
       hasLink: true,
       linkTitle: 'Cybersecurity Infrastructure Act - H.R. 2024',
       sources: ['Department of Homeland Security Assessment', 'NIST Cybersecurity Framework']
@@ -103,7 +123,7 @@ const Index = () => {
         name: 'Heritage Foundation',
         title: 'Policy Institute',
         institution: 'Washington, D.C.',
-        avatar: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=150&h=150&fit=crop',
+        avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face',
         verified: true
       },
       content: 'New research on healthcare policy reform shows promising results from state-level innovations. Our comprehensive study examines cost reduction strategies across 12 states.',
@@ -116,6 +136,13 @@ const Index = () => {
         shares: 112
       },
       hasChart: true,
+      chartData: [
+        { state: 'TX', savings: 12 },
+        { state: 'FL', savings: 8 },
+        { state: 'CA', savings: 15 },
+        { state: 'NY', savings: 10 },
+        { state: 'OH', savings: 6 }
+      ],
       hasLink: true,
       linkTitle: 'Healthcare Policy Innovation Study - Heritage Report',
       sources: ['CMS Data Analysis 2024', 'State Health Department Reports']
