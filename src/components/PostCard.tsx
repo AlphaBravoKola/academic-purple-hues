@@ -254,6 +254,16 @@ const PostCard = ({ post }: PostCardProps) => {
           </div>
         )}
 
+        {post.tags.length > 0 && (
+          <div className="mb-4 flex flex-wrap gap-2">
+            {post.tags.map((tag, index) => (
+              <Badge key={index} variant="secondary" className="text-xs">
+                {tag}
+              </Badge>
+            ))}
+          </div>
+        )}
+
         <div className="flex items-center justify-between pt-3 border-t border-gray-100">
           <div className="flex items-center space-x-6">
             <Button variant="ghost" size="sm" className="flex items-center space-x-2 text-gray-600 hover:text-purple-600">
