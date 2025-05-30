@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Heart, MessageCircle, Share2, Bookmark, MoreHorizontal, ExternalLink, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -69,71 +68,100 @@ const PostCard = ({ post }: PostCardProps) => {
     if ('year' in firstDataPoint && 'jobs' in firstDataPoint) {
       // Line chart for job growth over time
       return (
-        <ChartContainer config={chartConfig}>
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={post.chartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
-              <XAxis dataKey="year" fontSize={12} />
-              <YAxis fontSize={12} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Line type="monotone" dataKey="jobs" stroke="#8b5cf6" strokeWidth={2} />
-            </LineChart>
-          </ResponsiveContainer>
-        </ChartContainer>
+        <div className="w-full">
+          <h4 className="text-sm font-medium text-gray-700 mb-3">Job Creation Projection</h4>
+          <div className="h-48 w-full">
+            <ChartContainer config={chartConfig}>
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={post.chartData} margin={{ top: 10, right: 10, left: 10, bottom: 20 }}>
+                  <XAxis dataKey="year" fontSize={12} />
+                  <YAxis fontSize={12} tickFormatter={(value) => `${(value / 1000000).toFixed(1)}M`} />
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <Line type="monotone" dataKey="jobs" stroke="#8b5cf6" strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
+            </ChartContainer>
+          </div>
+        </div>
       );
     } else if ('energy' in firstDataPoint && 'support' in firstDataPoint) {
       // Bar chart for energy support
       return (
-        <ChartContainer config={chartConfig}>
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={post.chartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
-              <XAxis dataKey="energy" fontSize={12} />
-              <YAxis fontSize={12} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Bar dataKey="support" fill="#8b5cf6" />
-            </BarChart>
-          </ResponsiveContainer>
-        </ChartContainer>
+        <div className="w-full">
+          <h4 className="text-sm font-medium text-gray-700 mb-3">Public Support for Energy Sources (%)</h4>
+          <div className="h-48 w-full">
+            <ChartContainer config={chartConfig}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={post.chartData} margin={{ top: 10, right: 10, left: 10, bottom: 20 }}>
+                  <XAxis dataKey="energy" fontSize={12} />
+                  <YAxis fontSize={12} domain={[0, 100]} />
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <Bar dataKey="support" fill="#8b5cf6" />
+                </BarChart>
+              </ResponsiveContainer>
+            </ChartContainer>
+          </div>
+        </div>
       );
     } else if ('category' in firstDataPoint && 'vulnerabilities' in firstDataPoint) {
       // Pie chart for vulnerabilities
       const COLORS = ['#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe'];
       return (
-        <ChartContainer config={chartConfig}>
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
-              <Pie
-                data={post.chartData}
-                cx="50%"
-                cy="50%"
-                outerRadius={60}
-                fill="#8884d8"
-                dataKey="vulnerabilities"
-                label={({ category, vulnerabilities }) => `${category}: ${vulnerabilities}`}
-                labelLine={false}
-                fontSize={10}
-              >
-                {post.chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <ChartTooltip content={<ChartTooltipContent />} />
-            </PieChart>
-          </ResponsiveContainer>
-        </ChartContainer>
+        <div className="w-full">
+          <h4 className="text-sm font-medium text-gray-700 mb-3">Cybersecurity Vulnerabilities by Sector</h4>
+          <div className="h-48 w-full flex justify-center">
+            <ChartContainer config={chartConfig}>
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
+                  <Pie
+                    data={post.chartData}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={70}
+                    fill="#8884d8"
+                    dataKey="vulnerabilities"
+                    label={false}
+                  >
+                    {post.chartData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                </PieChart>
+              </ResponsiveContainer>
+            </ChartContainer>
+          </div>
+          <div className="flex flex-wrap gap-2 mt-2 justify-center">
+            {post.chartData.map((entry, index) => (
+              <div key={entry.category} className="flex items-center gap-1 text-xs">
+                <div 
+                  className="w-3 h-3 rounded" 
+                  style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                />
+                <span>{entry.category}: {entry.vulnerabilities}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       );
     } else if ('state' in firstDataPoint && 'savings' in firstDataPoint) {
       // Bar chart for state savings
       return (
-        <ChartContainer config={chartConfig}>
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={post.chartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
-              <XAxis dataKey="state" fontSize={12} />
-              <YAxis fontSize={12} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Bar dataKey="savings" fill="#8b5cf6" />
-            </BarChart>
-          </ResponsiveContainer>
-        </ChartContainer>
+        <div className="w-full">
+          <h4 className="text-sm font-medium text-gray-700 mb-3">Healthcare Cost Savings by State (%)</h4>
+          <div className="h-48 w-full">
+            <ChartContainer config={chartConfig}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={post.chartData} margin={{ top: 10, right: 10, left: 10, bottom: 20 }}>
+                  <XAxis dataKey="state" fontSize={12} />
+                  <YAxis fontSize={12} domain={[0, 20]} />
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <Bar dataKey="savings" fill="#8b5cf6" />
+                </BarChart>
+              </ResponsiveContainer>
+            </ChartContainer>
+          </div>
+        </div>
       );
     }
     
@@ -181,10 +209,8 @@ const PostCard = ({ post }: PostCardProps) => {
         </div>
 
         {post.hasChart && post.chartData && (
-          <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-            <div className="w-full h-64 min-h-64">
-              {renderChart()}
-            </div>
+          <div className="mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+            {renderChart()}
           </div>
         )}
 
