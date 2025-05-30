@@ -12,6 +12,35 @@ const Index = () => {
   // Sample data for posts with political themes
   const posts = [
     {
+      id: '4',
+      author: {
+        name: 'Rep. Michael Chen',
+        title: 'House Representative',
+        institution: 'House Energy Committee',
+        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+        verified: true
+      },
+      content: 'Breaking: Introducing bipartisan legislation for national cybersecurity infrastructure. This bill addresses critical vulnerabilities in our digital economy and national security systems.',
+      timestamp: '8 hours ago',
+      type: 'government' as const,
+      tags: ['Cybersecurity', 'NationalSecurity', 'Bipartisan', 'Infrastructure'],
+      metrics: {
+        likes: 567,
+        comments: 89,
+        shares: 145
+      },
+      hasChart: true,
+      chartData: [
+        { category: 'Financial', vulnerabilities: 45 },
+        { category: 'Healthcare', vulnerabilities: 38 },
+        { category: 'Energy', vulnerabilities: 52 },
+        { category: 'Transport', vulnerabilities: 29 }
+      ],
+      hasLink: true,
+      linkTitle: 'Cybersecurity Infrastructure Act - H.R. 2024',
+      sources: ['Department of Homeland Security Assessment', 'NIST Cybersecurity Framework']
+    },
+    {
       id: '1',
       author: {
         name: 'Senator Alexandra Johnson',
@@ -20,7 +49,7 @@ const Index = () => {
         avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
         verified: true
       },
-      content: 'Presenting our comprehensive economic recovery plan focusing on infrastructure investment and job creation. Our analysis shows job creation potential across key sectors.',
+      content: 'Presenting our comprehensive economic recovery plan focusing on infrastructure investment and job creation. Our analysis shows significant employment opportunities across key sectors including infrastructure, healthcare, technology, and manufacturing.',
       timestamp: '2 hours ago',
       type: 'government' as const,
       tags: ['EconomicPolicy', 'JobCreation', 'Infrastructure', 'Recovery'],
@@ -31,10 +60,10 @@ const Index = () => {
       },
       hasChart: true,
       chartData: [
-        { year: 'Infrastructure', jobs: 240 },
-        { year: 'Healthcare', jobs: 180 },
-        { year: 'Technology', jobs: 320 },
-        { year: 'Manufacturing', jobs: 160 }
+        { sector: 'Infrastructure', jobs: 240 },
+        { sector: 'Healthcare', jobs: 180 },
+        { sector: 'Technology', jobs: 320 },
+        { sector: 'Manufacturing', jobs: 160 }
       ],
       hasLink: true,
       linkTitle: 'Economic Recovery Plan - Full Policy Document',
@@ -87,35 +116,6 @@ const Index = () => {
         comments: 45,
         shares: 23
       }
-    },
-    {
-      id: '4',
-      author: {
-        name: 'Rep. Michael Chen',
-        title: 'House Representative',
-        institution: 'House Energy Committee',
-        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
-        verified: true
-      },
-      content: 'Breaking: Introducing bipartisan legislation for national cybersecurity infrastructure. This bill addresses critical vulnerabilities in our digital economy and national security systems.',
-      timestamp: '8 hours ago',
-      type: 'government' as const,
-      tags: ['Cybersecurity', 'NationalSecurity', 'Bipartisan', 'Infrastructure'],
-      metrics: {
-        likes: 567,
-        comments: 89,
-        shares: 145
-      },
-      hasChart: true,
-      chartData: [
-        { category: 'Financial', vulnerabilities: 45 },
-        { category: 'Healthcare', vulnerabilities: 38 },
-        { category: 'Energy', vulnerabilities: 52 },
-        { category: 'Transport', vulnerabilities: 29 }
-      ],
-      hasLink: true,
-      linkTitle: 'Cybersecurity Infrastructure Act - H.R. 2024',
-      sources: ['Department of Homeland Security Assessment', 'NIST Cybersecurity Framework']
     },
     {
       id: '5',
