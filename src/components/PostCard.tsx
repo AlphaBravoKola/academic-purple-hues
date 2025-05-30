@@ -66,7 +66,7 @@ const PostCard = ({ post }: PostCardProps) => {
     const firstDataPoint = post.chartData[0];
     
     // Determine chart type based on data structure
-    if ('year' in firstDataPoint && 'jobs' in firstDataPoint) {
+    if ('sector' in firstDataPoint && 'jobs' in firstDataPoint) {
       // Horizontal bar chart for job creation by sector
       return (
         <div className="w-full">
@@ -80,7 +80,7 @@ const PostCard = ({ post }: PostCardProps) => {
                   margin={{ top: 10, right: 30, left: 60, bottom: 10 }}
                 >
                   <XAxis type="number" fontSize={12} tickFormatter={(value) => `${value}k`} />
-                  <YAxis type="category" dataKey="year" fontSize={12} width={50} />
+                  <YAxis type="category" dataKey="sector" fontSize={12} width={80} />
                   <ChartTooltip 
                     content={<ChartTooltipContent />} 
                     formatter={(value) => [`${value}k jobs`, 'Jobs Created']}
@@ -251,16 +251,6 @@ const PostCard = ({ post }: PostCardProps) => {
                 ))}
               </div>
             </div>
-          </div>
-        )}
-
-        {post.tags.length > 0 && (
-          <div className="mb-4 flex flex-wrap gap-2">
-            {post.tags.map((tag, index) => (
-              <Badge key={index} variant="secondary" className="text-xs">
-                #{tag}
-              </Badge>
-            ))}
           </div>
         )}
 
