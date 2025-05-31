@@ -51,36 +51,52 @@ const Chat = () => {
     }
     
     if (message.includes('congress') || message.includes('senate') || message.includes('house')) {
-      return 'Congress is the legislative branch of the U.S. government, consisting of two chambers:\n\n🏛️ **House of Representatives**:\n• 435 voting members\n• 2-year terms\n• Representation based on state population\n• Led by the Speaker of the House\n\n🏛️ **Senate**:\n• 100 members (2 per state)\n• 6-year terms\n• Equal representation for all states\n• Led by the Vice President (as President of the Senate)\n\n⚖️ **Key Powers**:\n• Pass federal laws\n• Control government spending\n• Regulate interstate commerce\n• Declare war\n• Impeach federal officials\n\nWhat specific aspect of Congress would you like to explore further?';
+      return {
+        content: 'Congress is the legislative branch of the U.S. government, consisting of two chambers:\n\n🏛️ **House of Representatives**:\n• 435 voting members\n• 2-year terms\n• Representation based on state population\n• Led by the Speaker of the House\n\n🏛️ **Senate**:\n• 100 members (2 per state)\n• 6-year terms\n• Equal representation for all states\n• Led by the Vice President (as President of the Senate)\n\n⚖️ **Key Powers**:\n• Pass federal laws\n• Control government spending\n• Regulate interstate commerce\n• Declare war\n• Impeach federal officials\n\nWhat specific aspect of Congress would you like to explore further?'
+      };
     }
     
     if (message.includes('constitution')) {
-      return 'The U.S. Constitution is the supreme law of our nation! Here\'s what makes it special:\n\n📜 **Structure**:\n• Preamble (the famous \"We the People...\")\n• 7 Articles establishing government framework\n• 27 Amendments (including the Bill of Rights)\n\n⚖️ **Three Branches of Government**:\n• **Legislative** (Congress) - Makes laws\n• **Executive** (President) - Enforces laws\n• **Judicial** (Courts) - Interprets laws\n\n🛡️ **Key Principles**:\n• Separation of powers\n• Checks and balances\n• Federalism\n• Individual rights protection\n\n🔄 **Amendment Process**: The Constitution can be changed, but it requires broad consensus.\n\nWhich aspect of the Constitution interests you most?';
+      return {
+        content: 'The U.S. Constitution is the supreme law of our nation! Here\'s what makes it special:\n\n📜 **Structure**:\n• Preamble (the famous \"We the People...\")\n• 7 Articles establishing government framework\n• 27 Amendments (including the Bill of Rights)\n\n⚖️ **Three Branches of Government**:\n• **Legislative** (Congress) - Makes laws\n• **Executive** (President) - Enforces laws\n• **Judicial** (Courts) - Interprets laws\n\n🛡️ **Key Principles**:\n• Separation of powers\n• Checks and balances\n• Federalism\n• Individual rights protection\n\n🔄 **Amendment Process**: The Constitution can be changed, but it requires broad consensus.\n\nWhich aspect of the Constitution interests you most?'
+      };
     }
     
     if (message.includes('vote') || message.includes('voting') || message.includes('election')) {
-      return 'Voting is the cornerstone of democracy! Here\'s how it works:\n\n🗳️ **Types of Elections**:\n• **Presidential**: Every 4 years\n• **Congressional**: House every 2 years, Senate every 6 years (staggered)\n• **State/Local**: Varies by location\n\n📋 **How to Vote**:\n1. Register to vote in your state\n2. Research candidates and issues\n3. Find your polling location\n4. Vote on Election Day or by absentee/mail-in ballot\n\n🏛️ **Electoral College**: Presidential elections use this system where states get electoral votes based on their representation in Congress.\n\n🛡️ **Voting Rights**: Protected by federal laws including the Voting Rights Act.\n\nDo you have questions about voter registration, the electoral process, or voting rights?';
+      return {
+        content: 'Voting is the cornerstone of democracy! Here\'s how it works:\n\n🗳️ **Types of Elections**:\n• **Presidential**: Every 4 years\n• **Congressional**: House every 2 years, Senate every 6 years (staggered)\n• **State/Local**: Varies by location\n\n📋 **How to Vote**:\n1. Register to vote in your state\n2. Research candidates and issues\n3. Find your polling location\n4. Vote on Election Day or by absentee/mail-in ballot\n\n🏛️ **Electoral College**: Presidential elections use this system where states get electoral votes based on their representation in Congress.\n\n🛡️ **Voting Rights**: Protected by federal laws including the Voting Rights Act.\n\nDo you have questions about voter registration, the electoral process, or voting rights?'
+      };
     }
     
     if (message.includes('policy') || message.includes('policies')) {
-      return 'Policy analysis is crucial for understanding how government decisions affect our lives:\n\n🔍 **What is Policy Analysis?**\nThe systematic study of government actions, their costs, benefits, and impacts on society.\n\n📊 **Key Components**:\n• **Problem Definition**: What issue needs addressing?\n• **Options Analysis**: What are the possible solutions?\n• **Cost-Benefit Analysis**: What are the trade-offs?\n• **Implementation**: How will it work in practice?\n• **Evaluation**: Is it achieving its goals?\n\n🎯 **Types of Policies**:\n• Economic (taxes, spending)\n• Social (healthcare, education)\n• Environmental (climate, conservation)\n• Foreign (trade, diplomacy)\n\nWhat type of policy would you like to explore?';
+      return {
+        content: 'Policy analysis is crucial for understanding how government decisions affect our lives:\n\n🔍 **What is Policy Analysis?**\nThe systematic study of government actions, their costs, benefits, and impacts on society.\n\n📊 **Key Components**:\n• **Problem Definition**: What issue needs addressing?\n• **Options Analysis**: What are the possible solutions?\n• **Cost-Benefit Analysis**: What are the trade-offs?\n• **Implementation**: How will it work in practice?\n• **Evaluation**: Is it achieving its goals?\n\n🎯 **Types of Policies**:\n• Economic (taxes, spending)\n• Social (healthcare, education)\n• Environmental (climate, conservation)\n• Foreign (trade, diplomacy)\n\nWhat type of policy would you like to explore?'
+      };
     }
     
     if (message.includes('supreme court') || message.includes('judicial')) {
-      return 'The Supreme Court is the highest court in the land! Here\'s what you should know:\n\n⚖️ **Composition**:\n• 9 Justices (1 Chief Justice, 8 Associate Justices)\n• Appointed by the President, confirmed by Senate\n• Life tenure (until death, retirement, or impeachment)\n\n🔍 **Key Powers**:\n• **Judicial Review**: Can declare laws unconstitutional\n• **Final Appeals**: Last stop for legal disputes\n• **Constitutional Interpretation**: Decides what the Constitution means\n\n📋 **How Cases Reach the Court**:\n• Writ of Certiorari (\"cert petition\")\n• Court chooses which cases to hear\n• Only hears ~70 cases per year\n\n🏛️ **Impact**: Supreme Court decisions become the law of the land and set precedents for all other courts.\n\nWould you like to know about famous cases or how the Court operates?';
+      return {
+        content: 'The Supreme Court is the highest court in the land! Here\'s what you should know:\n\n⚖️ **Composition**:\n• 9 Justices (1 Chief Justice, 8 Associate Justices)\n• Appointed by the President, confirmed by Senate\n• Life tenure (until death, retirement, or impeachment)\n\n🔍 **Key Powers**:\n• **Judicial Review**: Can declare laws unconstitutional\n• **Final Appeals**: Last stop for legal disputes\n• **Constitutional Interpretation**: Decides what the Constitution means\n\n📋 **How Cases Reach the Court**:\n• Writ of Certiorari (\"cert petition\")\n• Court chooses which cases to hear\n• Only hears ~70 cases per year\n\n🏛️ **Impact**: Supreme Court decisions become the law of the land and set precedents for all other courts.\n\nWould you like to know about famous cases or how the Court operates?'
+      };
     }
 
     if (message.includes('impeachment')) {
-      return 'Impeachment is how Congress can remove federal officials for serious misconduct:\n\n⚖️ **The Process**:\n• **House**: Investigates and votes to impeach (simple majority)\n• **Senate**: Holds trial and votes to convict (2/3 majority required)\n\n📋 **Grounds for Impeachment**:\n"Treason, Bribery, or other high Crimes and Misdemeanors"\n\n🏛️ **Who Can Be Impeached**:\n• President, Vice President\n• Federal judges\n• Other federal officials\n\n📊 **Historical Context**:\n• Only 3 presidents have been impeached by the House\n• No president has ever been convicted by the Senate\n• Several federal judges have been removed\n\nInterested in learning about specific impeachment cases?';
+      return {
+        content: 'Impeachment is how Congress can remove federal officials for serious misconduct:\n\n⚖️ **The Process**:\n• **House**: Investigates and votes to impeach (simple majority)\n• **Senate**: Holds trial and votes to convict (2/3 majority required)\n\n📋 **Grounds for Impeachment**:\n"Treason, Bribery, or other high Crimes and Misdemeanors"\n\n🏛️ **Who Can Be Impeached**:\n• President, Vice President\n• Federal judges\n• Other federal officials\n\n📊 **Historical Context**:\n• Only 3 presidents have been impeached by the House\n• No president has ever been convicted by the Senate\n• Several federal judges have been removed\n\nInterested in learning about specific impeachment cases?'
+      };
     }
     
     // More contextual and helpful responses
     if (message.includes('thank') || message.includes('thanks')) {
-      return 'You\'re very welcome! I\'m here to help you understand our government and political system. Feel free to ask about anything from local politics to international relations. What else would you like to explore?';
+      return {
+        content: 'You\'re very welcome! I\'m here to help you understand our government and political system. Feel free to ask about anything from local politics to international relations. What else would you like to explore?'
+      };
     }
 
     if (message.includes('hello') || message.includes('hi ')) {
-      return 'Hello! I\'m excited to help you learn about government and politics. Whether you\'re curious about how laws work, want to understand elections, or explore policy issues, I\'m here to guide you. What interests you most?';
+      return {
+        content: 'Hello! I\'m excited to help you learn about government and politics. Whether you\'re curious about how laws work, want to understand elections, or explore policy issues, I\'m here to guide you. What interests you most?'
+      };
     }
     
     // Default response with suggestions
