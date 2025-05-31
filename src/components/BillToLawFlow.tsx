@@ -143,8 +143,8 @@ const BillToLawFlow = () => {
     }
   ];
 
-  const FlowContent = () => (
-    <div className={`p-8 bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50 dark:from-purple-900/30 dark:via-indigo-900/30 dark:to-blue-900/30 rounded-3xl border-2 border-purple-200 dark:border-purple-700 shadow-xl ${isFullscreen ? 'h-full overflow-y-auto' : ''}`}>
+  const FlowContent = ({ isFullscreenMode = false }) => (
+    <div className={`p-8 bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50 dark:from-purple-900/30 dark:via-indigo-900/30 dark:to-blue-900/30 rounded-3xl border-2 border-purple-200 dark:border-purple-700 shadow-xl ${isFullscreenMode ? 'h-full overflow-y-auto' : ''}`}>
       <div className="text-center mb-8">
         <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full mb-4 shadow-lg">
           <Building2 className="w-8 h-8 text-white" />
@@ -156,110 +156,198 @@ const BillToLawFlow = () => {
           🏛️ Interactive guide through the legislative process
         </p>
         
-        {/* Fullscreen Toggle Button */}
-        <div className="flex justify-center mt-4">
-          <Button
-            onClick={() => setIsFullscreen(!isFullscreen)}
-            variant="outline"
-            size="sm"
-            className="text-purple-600 border-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20"
-          >
-            {isFullscreen ? (
-              <>
-                <Minimize2 className="w-4 h-4 mr-2" />
-                Exit Fullscreen
-              </>
-            ) : (
-              <>
-                <Maximize2 className="w-4 h-4 mr-2" />
-                View Fullscreen
-              </>
-            )}
-          </Button>
-        </div>
+        {/* Fullscreen Toggle Button - only show in normal mode */}
+        {!isFullscreenMode && (
+          <div className="flex justify-center mt-4">
+            <Button
+              onClick={() => setIsFullscreen(true)}
+              variant="outline"
+              size="sm"
+              className="text-purple-600 border-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20"
+            >
+              <Maximize2 className="w-4 h-4 mr-2" />
+              View Fullscreen
+            </Button>
+          </div>
+        )}
       </div>
       
-      {/* Vertical Flow Layout */}
-      <div className="space-y-6 max-w-2xl mx-auto">
-        {steps.map((step, index) => (
-          <div key={step.id} className="group">
-            {/* Step Component */}
-            <div className="flex items-center space-x-4">
-              <div className="relative flex-shrink-0">
-                <Button
-                  variant={selectedStep === step.id ? "default" : "outline"}
-                  size="lg"
-                  className={`w-20 h-20 rounded-2xl p-0 transition-all duration-300 transform group-hover:scale-110 shadow-lg ${
-                    selectedStep === step.id 
-                      ? 'bg-gradient-to-br from-purple-500 to-purple-700 hover:from-purple-600 hover:to-purple-800 text-white shadow-purple-300 dark:shadow-purple-800' 
-                      : `bg-gradient-to-br ${step.bgColor} hover:from-purple-100 hover:to-purple-200 dark:hover:from-purple-800 dark:hover:to-purple-700 border-2 border-purple-200 dark:border-purple-600`
-                  }`}
-                  onClick={() => setSelectedStep(selectedStep === step.id ? null : step.id)}
-                >
-                  <div className={selectedStep === step.id ? 'text-white' : step.color}>
-                    {step.icon}
+      {/* Layout switches based on fullscreen mode */}
+      {isFullscreenMode ? (
+        // Horizontal Grid Layout for Fullscreen
+        <div className="grid grid-cols-3 gap-6 max-w-7xl mx-auto">
+          {steps.map((step, index) => (
+            <div key={step.id} className="group relative">
+              {/* Step Component */}
+              <div className="flex flex-col items-center space-y-4">
+                <div className="relative flex-shrink-0">
+                  <Button
+                    variant={selectedStep === step.id ? "default" : "outline"}
+                    size="lg"
+                    className={`w-24 h-24 rounded-2xl p-0 transition-all duration-300 transform group-hover:scale-110 shadow-lg ${
+                      selectedStep === step.id 
+                        ? 'bg-gradient-to-br from-purple-500 to-purple-700 hover:from-purple-600 hover:to-purple-800 text-white shadow-purple-300 dark:shadow-purple-800' 
+                        : `bg-gradient-to-br ${step.bgColor} hover:from-purple-100 hover:to-purple-200 dark:hover:from-purple-800 dark:hover:to-purple-700 border-2 border-purple-200 dark:border-purple-600`
+                    }`}
+                    onClick={() => setSelectedStep(selectedStep === step.id ? null : step.id)}
+                  >
+                    <div className={selectedStep === step.id ? 'text-white' : step.color}>
+                      {React.cloneElement(step.icon, { className: "w-8 h-8" })}
+                    </div>
+                  </Button>
+                  
+                  {/* Step number badge */}
+                  <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-700 text-white text-sm font-bold rounded-full flex items-center justify-center shadow-lg">
+                    {step.id}
                   </div>
-                </Button>
+                </div>
                 
-                {/* Step number badge */}
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 text-white text-sm font-bold rounded-full flex items-center justify-center shadow-lg">
-                  {step.id}
+                <div className="text-center">
+                  <h4 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">
+                    {step.title}
+                  </h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    {step.description}
+                  </p>
+                </div>
+                
+                {/* Horizontal Arrow - only show between steps in same row */}
+                {index < steps.length - 1 && (index + 1) % 3 !== 0 && (
+                  <div className="absolute -right-8 top-12 flex items-center">
+                    <ArrowRight className="w-12 h-12 text-purple-500 dark:text-purple-400 animate-pulse drop-shadow-md" strokeWidth={3} />
+                  </div>
+                )}
+                
+                {/* Vertical Arrow - show at end of first row */}
+                {index === 2 && (
+                  <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+                    <ArrowDown className="w-12 h-12 text-purple-500 dark:text-purple-400 animate-pulse drop-shadow-md" strokeWidth={3} />
+                  </div>
+                )}
+                
+                {/* Reverse horizontal arrow for second row */}
+                {index >= 3 && index < steps.length - 1 && (index - 2) % 3 !== 0 && (
+                  <div className="absolute -left-8 top-12 flex items-center">
+                    <ArrowRight className="w-12 h-12 text-purple-500 dark:text-purple-400 animate-pulse drop-shadow-md rotate-180" strokeWidth={3} />
+                  </div>
+                )}
+              </div>
+              
+              {/* Expanded Details */}
+              {selectedStep === step.id && (
+                <Card className="absolute top-32 left-1/2 transform -translate-x-1/2 w-96 z-10 bg-gradient-to-br from-white to-purple-50 dark:from-gray-800 dark:to-purple-900/30 border-2 border-purple-200 dark:border-purple-700 shadow-xl animate-fade-in">
+                  <CardContent className="p-6">
+                    <div className="space-y-4">
+                      <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
+                        {step.details.overview}
+                      </p>
+                      
+                      <div>
+                        <h5 className="text-base font-semibold text-purple-700 dark:text-purple-300 mb-3">Key Points:</h5>
+                        <ul className="space-y-2">
+                          {step.details.keyPoints.map((point, pointIndex) => (
+                            <li key={pointIndex} className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed pl-2">
+                              {point}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      <div className="bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-900/40 dark:to-indigo-900/40 rounded-lg p-4 border border-purple-200 dark:border-purple-700">
+                        <p className="text-sm text-purple-700 dark:text-purple-300 font-medium">
+                          {step.details.funFact}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        // Vertical Flow Layout for Normal Mode
+        <div className="space-y-6 max-w-2xl mx-auto">
+          {steps.map((step, index) => (
+            <div key={step.id} className="group">
+              {/* Step Component */}
+              <div className="flex items-center space-x-4">
+                <div className="relative flex-shrink-0">
+                  <Button
+                    variant={selectedStep === step.id ? "default" : "outline"}
+                    size="lg"
+                    className={`w-20 h-20 rounded-2xl p-0 transition-all duration-300 transform group-hover:scale-110 shadow-lg ${
+                      selectedStep === step.id 
+                        ? 'bg-gradient-to-br from-purple-500 to-purple-700 hover:from-purple-600 hover:to-purple-800 text-white shadow-purple-300 dark:shadow-purple-800' 
+                        : `bg-gradient-to-br ${step.bgColor} hover:from-purple-100 hover:to-purple-200 dark:hover:from-purple-800 dark:hover:to-purple-700 border-2 border-purple-200 dark:border-purple-600`
+                    }`}
+                    onClick={() => setSelectedStep(selectedStep === step.id ? null : step.id)}
+                  >
+                    <div className={selectedStep === step.id ? 'text-white' : step.color}>
+                      {step.icon}
+                    </div>
+                  </Button>
+                  
+                  {/* Step number badge */}
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 text-white text-sm font-bold rounded-full flex items-center justify-center shadow-lg">
+                    {step.id}
+                  </div>
+                </div>
+                
+                <div className="flex-1">
+                  <h4 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-1">
+                    {step.title}
+                  </h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    {step.description}
+                  </p>
                 </div>
               </div>
               
-              <div className="flex-1">
-                <h4 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-1">
-                  {step.title}
-                </h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {step.description}
-                </p>
-              </div>
-            </div>
-            
-            {/* Expanded Details */}
-            {selectedStep === step.id && (
-              <Card className="mt-4 ml-24 bg-gradient-to-br from-white to-purple-50 dark:from-gray-800 dark:to-purple-900/30 border-2 border-purple-200 dark:border-purple-700 shadow-xl animate-fade-in">
-                <CardContent className="p-6">
-                  <div className="space-y-4">
-                    <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
-                      {step.details.overview}
-                    </p>
-                    
-                    <div>
-                      <h5 className="text-base font-semibold text-purple-700 dark:text-purple-300 mb-3">Key Points:</h5>
-                      <ul className="space-y-2">
-                        {step.details.keyPoints.map((point, pointIndex) => (
-                          <li key={pointIndex} className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed pl-2">
-                            {point}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    <div className="bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-900/40 dark:to-indigo-900/40 rounded-lg p-4 border border-purple-200 dark:border-purple-700">
-                      <p className="text-sm text-purple-700 dark:text-purple-300 font-medium">
-                        {step.details.funFact}
+              {/* Expanded Details */}
+              {selectedStep === step.id && (
+                <Card className="mt-4 ml-24 bg-gradient-to-br from-white to-purple-50 dark:from-gray-800 dark:to-purple-900/30 border-2 border-purple-200 dark:border-purple-700 shadow-xl animate-fade-in">
+                  <CardContent className="p-6">
+                    <div className="space-y-4">
+                      <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
+                        {step.details.overview}
                       </p>
+                      
+                      <div>
+                        <h5 className="text-base font-semibold text-purple-700 dark:text-purple-300 mb-3">Key Points:</h5>
+                        <ul className="space-y-2">
+                          {step.details.keyPoints.map((point, pointIndex) => (
+                            <li key={pointIndex} className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed pl-2">
+                              {point}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      <div className="bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-900/40 dark:to-indigo-900/40 rounded-lg p-4 border border-purple-200 dark:border-purple-700">
+                        <p className="text-sm text-purple-700 dark:text-purple-300 font-medium">
+                          {step.details.funFact}
+                        </p>
+                      </div>
                     </div>
+                  </CardContent>
+                </Card>
+              )}
+              
+              {/* Enhanced Vertical Arrow */}
+              {index < steps.length - 1 && (
+                <div className="flex justify-center my-6">
+                  <div className="flex flex-col items-center">
+                    <div className="w-1 h-8 bg-gradient-to-b from-purple-500 to-purple-300 dark:from-purple-400 dark:to-purple-600 rounded-full"></div>
+                    <ArrowDown className="w-10 h-10 text-purple-500 dark:text-purple-400 animate-pulse drop-shadow-md my-2" strokeWidth={3} />
+                    <div className="w-1 h-8 bg-gradient-to-b from-purple-300 to-purple-500 dark:from-purple-600 dark:to-purple-400 rounded-full"></div>
                   </div>
-                </CardContent>
-              </Card>
-            )}
-            
-            {/* Enhanced Vertical Arrow */}
-            {index < steps.length - 1 && (
-              <div className="flex justify-center my-6">
-                <div className="flex flex-col items-center">
-                  <div className="w-1 h-8 bg-gradient-to-b from-purple-500 to-purple-300 dark:from-purple-400 dark:to-purple-600 rounded-full"></div>
-                  <ArrowDown className="w-10 h-10 text-purple-500 dark:text-purple-400 animate-pulse drop-shadow-md my-2" strokeWidth={3} />
-                  <div className="w-1 h-8 bg-gradient-to-b from-purple-300 to-purple-500 dark:from-purple-600 dark:to-purple-400 rounded-full"></div>
                 </div>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Footer with emojis and call to action */}
       <div className="text-center mt-8 p-6 bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-900/40 dark:to-indigo-900/40 rounded-2xl border border-purple-200 dark:border-purple-700">
@@ -282,16 +370,16 @@ const BillToLawFlow = () => {
 
   if (isFullscreen) {
     return (
-      <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-        <div className="relative w-full h-full max-w-6xl bg-white dark:bg-gray-900 rounded-3xl shadow-2xl">
+      <div className="fixed inset-0 z-[9999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-6">
+        <div className="relative w-full h-full max-w-7xl bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden">
           <Button
             onClick={() => setIsFullscreen(false)}
-            className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-red-500 hover:bg-red-600 text-white"
+            className="absolute top-6 right-6 z-10 w-12 h-12 rounded-full bg-red-500 hover:bg-red-600 text-white shadow-lg"
             size="icon"
           >
-            <X className="w-5 h-5" />
+            <X className="w-6 h-6" />
           </Button>
-          <FlowContent />
+          <FlowContent isFullscreenMode={true} />
         </div>
       </div>
     );
