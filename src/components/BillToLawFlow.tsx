@@ -2,14 +2,18 @@
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, FileText, Users, Vote, CheckCircle, Crown, Building2 } from 'lucide-react';
+import { ArrowRight, FileText, Users, Vote, CheckCircle, Crown, Building2, ArrowDown } from 'lucide-react';
 
 interface Step {
   id: number;
   title: string;
   description: string;
   icon: React.ReactNode;
-  details: string;
+  details: {
+    overview: string;
+    keyPoints: string[];
+    funFact: string;
+  };
   color: string;
   bgColor: string;
 }
@@ -23,7 +27,17 @@ const BillToLawFlow = () => {
       title: "Introduction",
       description: "Bill introduced in House or Senate",
       icon: <FileText className="w-6 h-6" />,
-      details: "Any member of Congress can introduce a bill. It gets assigned a number (H.R. for House, S. for Senate) and referred to the appropriate committee. Bills can start in either chamber, except revenue bills which must start in the House.",
+      details: {
+        overview: "The legislative journey begins when any member of Congress introduces a bill.",
+        keyPoints: [
+          "📝 Bills get assigned numbers (H.R. for House bills, S. for Senate bills)",
+          "🏛️ Can start in either chamber (except revenue bills must start in House)",
+          "📋 Referred to appropriate committee based on subject matter",
+          "⏰ Thousands of bills are introduced each session",
+          "🎯 Bill sponsor becomes the primary advocate"
+        ],
+        funFact: "💡 Did you know? About 10,000-15,000 bills are introduced in each Congress, but only about 3-5% become law!"
+      },
       color: "text-purple-600",
       bgColor: "from-purple-100 to-purple-200"
     },
@@ -32,7 +46,18 @@ const BillToLawFlow = () => {
       title: "Committee Review",
       description: "Committee examines and marks up bill",
       icon: <Users className="w-6 h-6" />,
-      details: "The committee studies the bill, holds hearings, and may make changes (markup). They can approve, reject, or table the bill. Committees are the workhorses of Congress where most detailed work happens.",
+      details: {
+        overview: "Committees are the workhorses of Congress where detailed examination happens.",
+        keyPoints: [
+          "🔍 Committee studies bill line by line",
+          "👥 Public hearings with expert witnesses",
+          "✏️ Markup sessions to make changes and amendments",
+          "📊 Research and analysis of potential impacts",
+          "🗳️ Committee votes to approve, reject, or table the bill",
+          "📝 Committee report explains their decision and reasoning"
+        ],
+        funFact: "⚡ Most bills die in committee - it's the biggest filter in the legislative process!"
+      },
       color: "text-indigo-600",
       bgColor: "from-indigo-100 to-indigo-200"
     },
@@ -41,7 +66,18 @@ const BillToLawFlow = () => {
       title: "Floor Vote",
       description: "Full chamber debates and votes",
       icon: <Vote className="w-6 h-6" />,
-      details: "If approved by committee, the bill goes to the full House or Senate for debate and voting. Simple majority needed to pass. The House uses electronic voting while the Senate often uses voice votes.",
+      details: {
+        overview: "If the committee approves, the bill goes to the full House or Senate for consideration.",
+        keyPoints: [
+          "🎤 Floor debate with time limits for speaking",
+          "📝 Members can propose amendments",
+          "🗳️ Simple majority (51%) needed to pass",
+          "📱 House uses electronic voting, Senate often uses voice votes",
+          "⏱️ Voting procedures differ between chambers",
+          "📊 Roll call votes are recorded and public"
+        ],
+        funFact: "🔔 House votes are usually 15 minutes, but members often rush from offices when the bells ring!"
+      },
       color: "text-blue-600",
       bgColor: "from-blue-100 to-blue-200"
     },
@@ -50,7 +86,18 @@ const BillToLawFlow = () => {
       title: "Other Chamber",
       description: "Same process in other chamber",
       icon: <Building2 className="w-6 h-6" />,
-      details: "The bill goes through the same committee and floor vote process in the other chamber. Both chambers must pass identical versions. If changes are made, it goes back to the first chamber.",
+      details: {
+        overview: "The bill must go through the exact same process in the other chamber of Congress.",
+        keyPoints: [
+          "🔄 Complete committee review process repeats",
+          "📝 Other chamber can make their own changes",
+          "⚖️ Both chambers must pass identical versions",
+          "🔀 If changes are made, bill returns to first chamber",
+          "🤝 Conference committee may be needed to resolve differences",
+          "✅ Final passage requires both chambers to agree"
+        ],
+        funFact: "🏛️ This 'bicameral' system ensures thorough review - the Founders wanted to prevent hasty legislation!"
+      },
       color: "text-violet-600",
       bgColor: "from-violet-100 to-violet-200"
     },
@@ -59,7 +106,18 @@ const BillToLawFlow = () => {
       title: "President's Desk",
       description: "President signs or vetoes",
       icon: <Crown className="w-6 h-6" />,
-      details: "The President has 10 days to sign the bill into law or veto it. If Congress is in session and the President takes no action, it becomes law automatically. If Congress adjourns, it's a 'pocket veto'.",
+      details: {
+        overview: "The President has several options when a bill reaches their desk.",
+        keyPoints: [
+          "✍️ Sign the bill - it immediately becomes law",
+          "❌ Veto the bill - sends it back to Congress with objections",
+          "⏰ Take no action for 10 days while Congress is in session (becomes law)",
+          "📋 'Pocket veto' if Congress adjourns within 10 days",
+          "💭 President considers political, legal, and policy implications",
+          "📢 Signing ceremonies for major legislation"
+        ],
+        funFact: "🖊️ Presidents often use multiple pens when signing important bills, giving them away as souvenirs!"
+      },
       color: "text-pink-600",
       bgColor: "from-pink-100 to-pink-200"
     },
@@ -68,7 +126,18 @@ const BillToLawFlow = () => {
       title: "Law or Override",
       description: "Becomes law or Congress overrides veto",
       icon: <CheckCircle className="w-6 h-6" />,
-      details: "If signed, it becomes law immediately (unless specified otherwise). If vetoed, Congress can override with a 2/3 majority in both chambers. If override succeeds, it becomes law without presidential signature.",
+      details: {
+        overview: "The final step determines whether the bill becomes law.",
+        keyPoints: [
+          "✅ If signed, becomes law immediately (unless specified otherwise)",
+          "🔄 If vetoed, Congress can attempt to override",
+          "⅔️ Override requires 2/3 majority in BOTH chambers",
+          "📊 Veto overrides are rare - only about 7% succeed historically",
+          "📅 New laws get assigned public law numbers",
+          "📚 Laws are compiled into the U.S. Code"
+        ],
+        funFact: "🏆 Franklin D. Roosevelt holds the record with 635 vetoes, while 9 presidents never vetoed a single bill!"
+      },
       color: "text-emerald-600",
       bgColor: "from-emerald-100 to-emerald-200"
     }
@@ -89,69 +158,99 @@ const BillToLawFlow = () => {
       </div>
       
       {/* Visual Flow */}
-      <div className="grid grid-cols-1 md:grid-cols-6 gap-6 mb-8">
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-8 mb-8">
         {steps.map((step, index) => (
-          <div key={step.id} className="flex flex-col items-center group">
-            <div className="relative">
-              <Button
-                variant={selectedStep === step.id ? "default" : "outline"}
-                size="lg"
-                className={`w-20 h-20 rounded-2xl p-0 mb-4 transition-all duration-300 transform group-hover:scale-110 shadow-lg ${
-                  selectedStep === step.id 
-                    ? 'bg-gradient-to-br from-purple-500 to-purple-700 hover:from-purple-600 hover:to-purple-800 text-white shadow-purple-300 dark:shadow-purple-800' 
-                    : `bg-gradient-to-br ${step.bgColor} hover:from-purple-100 hover:to-purple-200 dark:hover:from-purple-800 dark:hover:to-purple-700 border-2 border-purple-200 dark:border-purple-600`
-                }`}
-                onClick={() => setSelectedStep(selectedStep === step.id ? null : step.id)}
-              >
-                <div className={selectedStep === step.id ? 'text-white' : step.color}>
-                  {step.icon}
+          <div key={step.id} className="flex flex-col lg:flex-row items-center group">
+            {/* Step Component */}
+            <div className="flex flex-col items-center">
+              <div className="relative">
+                <Button
+                  variant={selectedStep === step.id ? "default" : "outline"}
+                  size="lg"
+                  className={`w-24 h-24 rounded-2xl p-0 mb-4 transition-all duration-300 transform group-hover:scale-110 shadow-lg ${
+                    selectedStep === step.id 
+                      ? 'bg-gradient-to-br from-purple-500 to-purple-700 hover:from-purple-600 hover:to-purple-800 text-white shadow-purple-300 dark:shadow-purple-800' 
+                      : `bg-gradient-to-br ${step.bgColor} hover:from-purple-100 hover:to-purple-200 dark:hover:from-purple-800 dark:hover:to-purple-700 border-2 border-purple-200 dark:border-purple-600`
+                  }`}
+                  onClick={() => setSelectedStep(selectedStep === step.id ? null : step.id)}
+                >
+                  <div className={selectedStep === step.id ? 'text-white' : step.color}>
+                    {step.icon}
+                  </div>
+                </Button>
+                
+                {/* Step number badge */}
+                <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 text-white text-sm font-bold rounded-full flex items-center justify-center shadow-lg">
+                  {step.id}
                 </div>
-              </Button>
+              </div>
               
-              {/* Step number badge */}
-              <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 text-white text-sm font-bold rounded-full flex items-center justify-center shadow-lg">
-                {step.id}
+              <div className="text-center max-w-28">
+                <p className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-1">
+                  {step.title}
+                </p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 leading-tight">
+                  {step.description}
+                </p>
               </div>
             </div>
             
-            <div className="text-center max-w-24">
-              <p className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-1">
-                {step.title}
-              </p>
-              <p className="text-xs text-gray-600 dark:text-gray-400 leading-tight">
-                {step.description}
-              </p>
-            </div>
-            
+            {/* Enhanced Arrow */}
             {index < steps.length - 1 && (
-              <div className="hidden md:flex items-center justify-center mt-4">
-                <ArrowRight className="w-6 h-6 text-purple-400 dark:text-purple-500 animate-pulse" />
+              <div className="flex lg:flex-col items-center justify-center mx-6 my-4 lg:my-0">
+                <div className="hidden lg:flex flex-col items-center">
+                  <ArrowRight className="w-8 h-8 text-purple-500 dark:text-purple-400 animate-pulse drop-shadow-md" strokeWidth={3} />
+                  <div className="w-1 h-8 bg-gradient-to-b from-purple-500 to-purple-300 dark:from-purple-400 dark:to-purple-600 rounded-full mt-2"></div>
+                </div>
+                <div className="lg:hidden flex items-center">
+                  <ArrowDown className="w-8 h-8 text-purple-500 dark:text-purple-400 animate-pulse drop-shadow-md" strokeWidth={3} />
+                </div>
               </div>
             )}
           </div>
         ))}
       </div>
 
-      {/* Step Details */}
+      {/* Enhanced Step Details */}
       {selectedStep && (
         <Card className="bg-gradient-to-br from-white to-purple-50 dark:from-gray-800 dark:to-purple-900/30 border-2 border-purple-200 dark:border-purple-700 shadow-xl animate-fade-in">
-          <CardContent className="p-6">
-            <div className="flex items-start space-x-4">
-              <div className={`${steps.find(step => step.id === selectedStep)?.color} mt-1 p-3 bg-gradient-to-br ${steps.find(step => step.id === selectedStep)?.bgColor} rounded-xl`}>
+          <CardContent className="p-8">
+            <div className="flex items-start space-x-6">
+              <div className={`${steps.find(step => step.id === selectedStep)?.color} mt-1 p-4 bg-gradient-to-br ${steps.find(step => step.id === selectedStep)?.bgColor} rounded-xl shadow-md`}>
                 {steps.find(step => step.id === selectedStep)?.icon}
               </div>
               <div className="flex-1">
-                <div className="flex items-center mb-3">
-                  <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 text-white text-sm font-bold rounded-full flex items-center justify-center mr-3">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-700 text-white text-lg font-bold rounded-full flex items-center justify-center mr-4 shadow-md">
                     {selectedStep}
                   </div>
-                  <h4 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                  <h4 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
                     {steps.find(step => step.id === selectedStep)?.title}
                   </h4>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base">
-                  {steps.find(step => step.id === selectedStep)?.details}
-                </p>
+                
+                <div className="space-y-4">
+                  <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
+                    {steps.find(step => step.id === selectedStep)?.details.overview}
+                  </p>
+                  
+                  <div>
+                    <h5 className="text-lg font-semibold text-purple-700 dark:text-purple-300 mb-3">Key Points:</h5>
+                    <ul className="space-y-2">
+                      {steps.find(step => step.id === selectedStep)?.details.keyPoints.map((point, index) => (
+                        <li key={index} className="text-gray-700 dark:text-gray-300 leading-relaxed pl-2">
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div className="bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-900/40 dark:to-indigo-900/40 rounded-lg p-4 border border-purple-200 dark:border-purple-700">
+                    <p className="text-sm text-purple-700 dark:text-purple-300 font-medium">
+                      {steps.find(step => step.id === selectedStep)?.details.funFact}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </CardContent>
@@ -159,14 +258,19 @@ const BillToLawFlow = () => {
       )}
 
       {/* Footer with emojis and call to action */}
-      <div className="text-center mt-8 p-4 bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-900/40 dark:to-indigo-900/40 rounded-2xl border border-purple-200 dark:border-purple-700">
-        <p className="text-sm text-purple-700 dark:text-purple-300 font-medium mb-2">
-          🗳️ Click on any step above to explore the details! 🏛️
+      <div className="text-center mt-8 p-6 bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-900/40 dark:to-indigo-900/40 rounded-2xl border border-purple-200 dark:border-purple-700">
+        <p className="text-lg text-purple-700 dark:text-purple-300 font-semibold mb-3">
+          🗳️ Click on any step above to explore detailed information! 🏛️
         </p>
-        <div className="flex justify-center space-x-2 text-2xl">
+        <p className="text-sm text-purple-600 dark:text-purple-400 mb-3">
+          Understanding how laws are made helps you become a more informed citizen
+        </p>
+        <div className="flex justify-center space-x-3 text-3xl">
           <span>📜</span>
           <span>⚖️</span>
           <span>🇺🇸</span>
+          <span>🏛️</span>
+          <span>📊</span>
         </div>
       </div>
     </div>
