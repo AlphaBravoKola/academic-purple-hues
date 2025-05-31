@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, ArrowLeft, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -129,25 +128,25 @@ const Chat = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
       {/* Header */}
-      <div className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-        <div className="max-w-4xl mx-auto px-4 py-4">
+      <div className="border-b border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
+        <div className="max-w-5xl mx-auto px-6 py-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Link to="/">
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" className="text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to Feed
                 </Button>
               </Link>
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-white" />
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center shadow-lg">
+                  <Sparkles className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-gray-900 dark:text-white">PoliChat</h1>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Your AI Government Guide</p>
+                  <h1 className="text-2xl font-bold text-gray-900 dark:text-white">PoliChat</h1>
+                  <p className="text-base text-gray-600 dark:text-gray-400">Your AI Government Guide</p>
                 </div>
               </div>
             </div>
@@ -156,37 +155,37 @@ const Chat = () => {
       </div>
 
       {/* Chat Container */}
-      <div className="max-w-4xl mx-auto px-4 py-6">
-        <Card className="h-[calc(100vh-200px)] flex flex-col bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+      <div className="max-w-5xl mx-auto px-6 py-8">
+        <Card className="h-[calc(100vh-220px)] flex flex-col bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-xl">
           {/* Messages */}
-          <ScrollArea className="flex-1 p-6">
-            <div className="space-y-6">
+          <ScrollArea className="flex-1 p-8">
+            <div className="space-y-8">
               {messages.map((message) => (
                 <div
                   key={message.id}
                   className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`flex items-start space-x-3 max-w-[80%] ${message.type === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                  <div className={`flex items-start space-x-4 max-w-[85%] ${message.type === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 shadow-md ${
                       message.type === 'user' 
-                        ? 'bg-purple-600' 
-                        : 'bg-gray-100 dark:bg-gray-700'
+                        ? 'bg-gradient-to-br from-purple-500 to-purple-700' 
+                        : 'bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600'
                     }`}>
                       {message.type === 'user' ? (
-                        <User className="w-4 h-4 text-white" />
+                        <User className="w-5 h-5 text-white" />
                       ) : (
-                        <Bot className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                        <Bot className="w-5 h-5 text-purple-600 dark:text-purple-400" />
                       )}
                     </div>
                     <div
-                      className={`rounded-lg p-4 ${
+                      className={`rounded-2xl p-6 shadow-sm ${
                         message.type === 'user'
-                          ? 'bg-purple-600 text-white'
-                          : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100'
+                          ? 'bg-gradient-to-br from-purple-500 to-purple-600 text-white'
+                          : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-gray-100 dark:border-gray-600'
                       }`}
                     >
-                      <div className="text-sm leading-relaxed whitespace-pre-line">{message.content}</div>
-                      <div className={`text-xs mt-2 opacity-70 ${
+                      <div className="text-base leading-relaxed whitespace-pre-line font-medium">{message.content}</div>
+                      <div className={`text-sm mt-3 opacity-75 ${
                         message.type === 'user' ? 'text-purple-100' : 'text-gray-500 dark:text-gray-400'
                       }`}>
                         {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -198,15 +197,15 @@ const Chat = () => {
               
               {isTyping && (
                 <div className="flex justify-start">
-                  <div className="flex items-start space-x-3 max-w-[80%]">
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-gray-100 dark:bg-gray-700">
-                      <Bot className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                  <div className="flex items-start space-x-4 max-w-[85%]">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 shadow-md">
+                      <Bot className="w-5 h-5 text-purple-600 dark:text-purple-400" />
                     </div>
-                    <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-4">
-                      <div className="flex space-x-1">
-                        <div className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                        <div className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    <div className="bg-white dark:bg-gray-700 rounded-2xl p-6 border border-gray-100 dark:border-gray-600 shadow-sm">
+                      <div className="flex space-x-2">
+                        <div className="w-3 h-3 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce"></div>
+                        <div className="w-3 h-3 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                        <div className="w-3 h-3 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                       </div>
                     </div>
                   </div>
@@ -218,16 +217,16 @@ const Chat = () => {
           
           {/* Suggested Questions */}
           {messages.length === 1 && (
-            <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">Try asking:</p>
-              <div className="flex flex-wrap gap-2">
+            <div className="px-8 py-5 border-t border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50">
+              <p className="text-base text-gray-700 dark:text-gray-300 mb-4 font-medium">Try asking:</p>
+              <div className="flex flex-wrap gap-3">
                 {suggestedQuestions.map((question, index) => (
                   <Button
                     key={index}
                     variant="outline"
                     size="sm"
                     onClick={() => handleSuggestedQuestion(question)}
-                    className="text-xs h-8 bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600"
+                    className="text-sm h-10 px-4 bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 hover:bg-purple-50 dark:hover:bg-gray-600 hover:border-purple-300 dark:hover:border-purple-500 transition-all duration-200"
                   >
                     {question}
                   </Button>
@@ -237,22 +236,22 @@ const Chat = () => {
           )}
           
           {/* Input */}
-          <div className="p-6 border-t border-gray-200 dark:border-gray-700">
-            <div className="flex space-x-3">
+          <div className="p-8 border-t border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50">
+            <div className="flex space-x-4">
               <Input
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Ask me anything about government, laws, or politics..."
-                className="flex-1 bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 focus:border-purple-500 dark:focus:border-purple-400"
+                className="flex-1 text-base h-12 bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 focus:border-purple-500 dark:focus:border-purple-400 rounded-xl px-4 shadow-sm"
                 disabled={isTyping}
               />
               <Button
                 onClick={handleSendMessage}
                 disabled={!inputValue.trim() || isTyping}
-                className="bg-purple-600 hover:bg-purple-700 text-white px-6"
+                className="bg-gradient-to-r from-purple-500 to-purple-700 hover:from-purple-600 hover:to-purple-800 text-white px-8 h-12 rounded-xl shadow-md transition-all duration-200"
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-5 h-5" />
               </Button>
             </div>
           </div>
