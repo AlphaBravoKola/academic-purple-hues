@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, FileText, Users, Vote, CheckCircle, Crown, Building2, ArrowDown } from 'lucide-react';
+import { ArrowRight, FileText, Users, Vote, CheckCircle, Crown, Building2, ArrowDown, Maximize2, Minimize2, X } from 'lucide-react';
 
 interface Step {
   id: number;
@@ -19,6 +19,7 @@ interface Step {
 
 const BillToLawFlow = () => {
   const [selectedStep, setSelectedStep] = useState<number | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const steps: Step[] = [
     {
@@ -142,8 +143,8 @@ const BillToLawFlow = () => {
     }
   ];
 
-  return (
-    <div className="my-8 p-8 bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50 dark:from-purple-900/30 dark:via-indigo-900/30 dark:to-blue-900/30 rounded-3xl border-2 border-purple-200 dark:border-purple-700 shadow-xl">
+  const FlowContent = () => (
+    <div className={`p-8 bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50 dark:from-purple-900/30 dark:via-indigo-900/30 dark:to-blue-900/30 rounded-3xl border-2 border-purple-200 dark:border-purple-700 shadow-xl ${isFullscreen ? 'h-full overflow-y-auto' : ''}`}>
       <div className="text-center mb-8">
         <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full mb-4 shadow-lg">
           <Building2 className="w-8 h-8 text-white" />
@@ -154,6 +155,28 @@ const BillToLawFlow = () => {
         <p className="text-purple-700 dark:text-purple-300 text-lg">
           🏛️ Interactive guide through the legislative process
         </p>
+        
+        {/* Fullscreen Toggle Button */}
+        <div className="flex justify-center mt-4">
+          <Button
+            onClick={() => setIsFullscreen(!isFullscreen)}
+            variant="outline"
+            size="sm"
+            className="text-purple-600 border-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20"
+          >
+            {isFullscreen ? (
+              <>
+                <Minimize2 className="w-4 h-4 mr-2" />
+                Exit Fullscreen
+              </>
+            ) : (
+              <>
+                <Maximize2 className="w-4 h-4 mr-2" />
+                View Fullscreen
+              </>
+            )}
+          </Button>
+        </div>
       </div>
       
       {/* Vertical Flow Layout */}
@@ -254,6 +277,29 @@ const BillToLawFlow = () => {
           <span>📊</span>
         </div>
       </div>
+    </div>
+  );
+
+  if (isFullscreen) {
+    return (
+      <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="relative w-full h-full max-w-6xl bg-white dark:bg-gray-900 rounded-3xl shadow-2xl">
+          <Button
+            onClick={() => setIsFullscreen(false)}
+            className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-red-500 hover:bg-red-600 text-white"
+            size="icon"
+          >
+            <X className="w-5 h-5" />
+          </Button>
+          <FlowContent />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="my-8">
+      <FlowContent />
     </div>
   );
 };
