@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Link } from 'react-router-dom';
+import BillToLawFlow from '@/components/BillToLawFlow';
 
 interface Message {
   id: string;
@@ -12,6 +13,8 @@ interface Message {
   content: string;
   timestamp: Date;
   isTyping?: boolean;
+  hasVisual?: boolean;
+  visualType?: 'bill-to-law';
 }
 
 const Chat = () => {
@@ -35,12 +38,16 @@ const Chat = () => {
     scrollToBottom();
   }, [messages]);
 
-  const generateBotResponse = (userMessage: string): string => {
+  const generateBotResponse = (userMessage: string): { content: string; hasVisual?: boolean; visualType?: 'bill-to-law' } => {
     const message = userMessage.toLowerCase();
     
     // More sophisticated response logic
     if (message.includes('how') && (message.includes('bill') || message.includes('law'))) {
-      return 'Great question! The process of how a bill becomes law involves several important steps:\n\n🏛️ **Introduction**: A bill can be introduced in either the House or Senate by a member of Congress.\n\n📋 **Committee Review**: The bill goes to the relevant committee where experts examine it, hold hearings, and may make changes.\n\n🗳️ **Floor Vote**: If approved by committee, the full chamber debates and votes on the bill.\n\n🔄 **Other Chamber**: If passed, it goes to the other chamber (House→Senate or Senate→House) for the same process.\n\n📝 **President\'s Desk**: If both chambers pass identical versions, it goes to the President who can sign it into law or veto it.\n\n⚖️ **Override**: Congress can override a presidential veto with a 2/3 majority in both chambers.\n\nWould you like me to explain any of these steps in more detail?';
+      return {
+        content: 'Great question! Here\'s the step-by-step process of how a bill becomes law. I\'ve included an interactive visual guide below - click on each step to learn more details!\n\n🏛️ This process ensures that laws are carefully considered by both chambers of Congress and the President before taking effect.',
+        hasVisual: true,
+        visualType: 'bill-to-law'
+      };
     }
     
     if (message.includes('congress') || message.includes('senate') || message.includes('house')) {
@@ -48,7 +55,7 @@ const Chat = () => {
     }
     
     if (message.includes('constitution')) {
-      return 'The U.S. Constitution is the supreme law of our nation! Here\'s what makes it special:\n\n📜 **Structure**:\n• Preamble (the famous "We the People...")\n• 7 Articles establishing government framework\n• 27 Amendments (including the Bill of Rights)\n\n⚖️ **Three Branches of Government**:\n• **Legislative** (Congress) - Makes laws\n• **Executive** (President) - Enforces laws\n• **Judicial** (Courts) - Interprets laws\n\n🛡️ **Key Principles**:\n• Separation of powers\n• Checks and balances\n• Federalism\n• Individual rights protection\n\n🔄 **Amendment Process**: The Constitution can be changed, but it requires broad consensus.\n\nWhich aspect of the Constitution interests you most?';
+      return 'The U.S. Constitution is the supreme law of our nation! Here\'s what makes it special:\n\n📜 **Structure**:\n• Preamble (the famous \"We the People...\")\n• 7 Articles establishing government framework\n• 27 Amendments (including the Bill of Rights)\n\n⚖️ **Three Branches of Government**:\n• **Legislative** (Congress) - Makes laws\n• **Executive** (President) - Enforces laws\n• **Judicial** (Courts) - Interprets laws\n\n🛡️ **Key Principles**:\n• Separation of powers\n• Checks and balances\n• Federalism\n• Individual rights protection\n\n🔄 **Amendment Process**: The Constitution can be changed, but it requires broad consensus.\n\nWhich aspect of the Constitution interests you most?';
     }
     
     if (message.includes('vote') || message.includes('voting') || message.includes('election')) {
@@ -77,7 +84,9 @@ const Chat = () => {
     }
     
     // Default response with suggestions
-    return 'That\'s an interesting question! I\'d love to help you explore that topic further. Here are some ways I can assist:\n\n🏛️ **Government Structure**: How the three branches work together\n📜 **Legislative Process**: How bills become laws\n🗳️ **Elections & Voting**: Understanding our democratic process\n⚖️ **Constitutional Law**: Your rights and protections\n🌍 **Policy Analysis**: How government decisions affect you\n\nCould you tell me more specifically what you\'d like to learn about? Or feel free to ask any question about government, politics, or policy!';
+    return {
+      content: 'That\'s an interesting question! I\'d love to help you explore that topic further. Here are some ways I can assist:\n\n🏛️ **Government Structure**: How the three branches work together\n📜 **Legislative Process**: How bills become laws\n🗳️ **Elections & Voting**: Understanding our democratic process\n⚖️ **Constitutional Law**: Your rights and protections\n🌍 **Policy Analysis**: How government decisions affect you\n\nCould you tell me more specifically what you\'d like to learn about? Or feel free to ask any question about government, politics, or policy!'
+    };
   };
 
   const suggestedQuestions = [
@@ -104,11 +113,14 @@ const Chat = () => {
 
     // Simulate AI response delay
     setTimeout(() => {
+      const response = generateBotResponse(inputValue);
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
         type: 'bot',
-        content: generateBotResponse(inputValue),
-        timestamp: new Date()
+        content: response.content,
+        timestamp: new Date(),
+        hasVisual: response.hasVisual,
+        visualType: response.visualType
       };
       
       setMessages(prev => [...prev, botResponse]);
@@ -185,6 +197,12 @@ const Chat = () => {
                       }`}
                     >
                       <div className="text-base leading-relaxed whitespace-pre-line font-medium">{message.content}</div>
+                      
+                      {/* Visual Component */}
+                      {message.hasVisual && message.visualType === 'bill-to-law' && (
+                        <BillToLawFlow />
+                      )}
+                      
                       <div className={`text-sm mt-3 opacity-75 ${
                         message.type === 'user' ? 'text-purple-100' : 'text-gray-500 dark:text-gray-400'
                       }`}>
