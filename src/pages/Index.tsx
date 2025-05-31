@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Header from '@/components/Header';
 import PostCard from '@/components/PostCard';
 import Sidebar from '@/components/Sidebar';
+import ChatBot from '@/components/ChatBot';
 import { Button } from '@/components/ui/button';
 import { PlusCircle } from 'lucide-react';
 
@@ -191,6 +192,9 @@ const Index = () => {
           </div>
         </div>
       </div>
+
+      {/* ChatBot */}
+      <ChatBot />
     </div>
   );
 };
