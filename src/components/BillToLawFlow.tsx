@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,7 +8,7 @@ interface Step {
   id: number;
   title: string;
   description: string;
-  icon: React.ReactNode;
+  icon: React.ReactElement;
   details: {
     overview: string;
     keyPoints: string[];
